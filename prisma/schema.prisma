@@ -1,0 +1,72 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PaymentMethod {
+  DEBIT_CARD
+  CREDIT_CARD
+}
+
+enum PayableStatus {
+  PAID
+  WAITING_FUNDS
+}
+
+model Consumers {
+  id           String         @id @default(uuid())
+  fullName     String
+  email        String         @unique
+
+  transactions Transactions[]
+  payables     Payables[]
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @default(now()) @updatedAt
+
+  @@map("consumers")
+}
+
+model Transactions {
+  id                   String     @id @default(uuid())
+  value                Decimal    @db.Decimal(9, 2)
+  description          String
+  paymentMethod        PaymentMethod
+  cardNumber           String
+  cardOwnerName        String
+  cardExpirationDate   DateTime
+  cardCVV              String
+
+  consumer             Consumers? @relation(fields: [consumerId], references: [id])
+  consumerId           String?    @unique
+  
+  payables             Payables?
+
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @default(now()) @updatedAt
+
+  @@map("transactions")
+}
+
+model Payables {
+  id            String        @id @default(uuid())
+  status        PayableStatus?
+  paymentDate   DateTime?     @db.Date
+  fee           Decimal?      @db.Decimal(9, 2)
+  
+  consumer      Consumers?    @relation(fields: [consumerId], references: [id])
+  consumerId    String
+  
+  transaction   Transactions? @relation(fields: [transactionId], references: [id])
+  transactionId String        @unique
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now()) @updatedAt
+
+  @@map("payables")
+}
