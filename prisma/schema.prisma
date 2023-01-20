@@ -18,13 +18,13 @@ enum PayableStatus {
   WAITING_FUNDS
 }
 
-model Consumers {
+model Consumer {
   id           String         @id @default(uuid())
   fullName     String
   email        String         @unique
 
-  transactions Transactions[]
-  payables     Payables[]
+  transactions Transaction[]
+  payables     Payable[]
 
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @default(now()) @updatedAt
@@ -32,7 +32,7 @@ model Consumers {
   @@map("consumers")
 }
 
-model Transactions {
+model Transaction {
   id                   String     @id @default(uuid())
   value                Decimal    @db.Decimal(9, 2)
   description          String
@@ -42,10 +42,10 @@ model Transactions {
   cardExpirationDate   DateTime
   cardCVV              String
 
-  consumer             Consumers? @relation(fields: [consumerId], references: [id])
+  consumer             Consumer? @relation(fields: [consumerId], references: [id])
   consumerId           String?    @unique
   
-  payables             Payables?
+  payables             Payable?
 
   createdAt            DateTime   @default(now())
   updatedAt            DateTime   @default(now()) @updatedAt
@@ -53,16 +53,16 @@ model Transactions {
   @@map("transactions")
 }
 
-model Payables {
+model Payable {
   id            String        @id @default(uuid())
   status        PayableStatus?
   paymentDate   DateTime?     @db.Date
   fee           Decimal?      @db.Decimal(9, 2)
   
-  consumer      Consumers?    @relation(fields: [consumerId], references: [id])
+  consumer      Consumer?    @relation(fields: [consumerId], references: [id])
   consumerId    String
   
-  transaction   Transactions? @relation(fields: [transactionId], references: [id])
+  transaction   Transaction? @relation(fields: [transactionId], references: [id])
   transactionId String        @unique
 
   createdAt     DateTime      @default(now())
