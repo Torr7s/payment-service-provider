@@ -5,7 +5,7 @@ import {
   ConsumerRepositoryFindByEmailNS, 
   ConsumerRepositoryFindByIdNS, 
   ConsumerRepositoryInterface 
-} from '@/domain/contracts/repositories/consumer.repository';
+} from '@/domain/contracts/repositories';
 
 export abstract class ConsumersRepository implements ConsumerRepositoryInterface {
   public abstract create(params: ConsumerRepositoryCreateNS.Input): Promise<ConsumerRepositoryCreateNS.Output>;
