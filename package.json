@@ -5,6 +5,10 @@
   "description": "Pagar.me software engineer technical challenge",
   "license": "MIT",
   "author": "Matheus Torres <torr7s.contact@gmail.com>",
+  "engines": {
+    "node": ">=18.12.0",
+    "yarn": "1.22.19"
+  },
   "scripts": {
     "build": "nest build",
     "start": "nest start",
@@ -12,7 +16,9 @@
     "start:prod": "node dist/src/main",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage",
+    "prisma:dev": "prisma migrate dev -n",
+    "prisma:gen": "prisma generate"
   },
   "jest": {
     "collectCoverageFrom": [
