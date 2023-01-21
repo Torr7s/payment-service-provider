@@ -3,10 +3,10 @@ import { Module } from '@nestjs/common';
 import { ConsumerController } from './consumer.controller';
 
 import { ConsumerRepository } from '@/app/repositories/consumer.repository';
-import { CreateConsumerUseCase } from '@/app/use-cases/consumers/create-consumer.use-case';
+import { CreateConsumerUseCase } from '@/app/use-cases/consumers';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
-import { PrismaConsumerRepository } from '@/infra/database/prisma/repositories/consumers.repository';
+import { PrismaConsumerRepository } from '@/infra/database/prisma/repositories/consumer.repository';
 
 @Module({
   controllers: [ConsumerController],
