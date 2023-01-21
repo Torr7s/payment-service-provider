@@ -9,7 +9,7 @@
     "baseUrl": "src",
     "resolveJsonModule": true,
     "allowJs": true,
-    "outDir": "./build",
+    "outDir": "dist",
     "removeComments": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
