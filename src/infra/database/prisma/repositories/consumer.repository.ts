@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma.service';
 import { ConsumerRepository } from '@/app/repositories';
 
 import { ConsumerRepositoryFindByEmailNS, ConsumerRepositoryFindByIdNS } from '@/domain/contracts/repositories';
-import { CreateConsumerUseCaseNS } from '@/domain/useCases/consumers';
+import { CreateConsumerUseCaseNS } from '@/domain/use-cases/consumers';
 
 @Injectable()
 export class PrismaConsumerRepository implements ConsumerRepository {
