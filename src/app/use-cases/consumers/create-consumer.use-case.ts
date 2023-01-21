@@ -1,12 +1,12 @@
 import { Consumer } from '@prisma/client';
 import { BadRequestException } from '@nestjs/common';
 
-import { CreatConsumerUseCaseDomain, CreateConsumerUseCaseNS } from '@/domain/useCases/consumers';
+import { CreatConsumerUseCaseDomain, CreateConsumerUseCaseNS } from '@/domain/use-cases/consumers';
 
-import { ConsumersRepository } from '@/app/repositories/consumers.repository';
+import { ConsumerRepository } from '@/app/repositories';
 
 export class CreateConsumerUseCase implements CreatConsumerUseCaseDomain {
-  constructor(private readonly repository: ConsumersRepository) { }
+  constructor(private readonly repository: ConsumerRepository) { }
 
   public async execute(params: CreateConsumerUseCaseNS.Input): Promise<CreateConsumerUseCaseNS.Output> {
     const consumerAlreadyRegistered: Consumer = (
