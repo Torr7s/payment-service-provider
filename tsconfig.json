@@ -14,8 +14,14 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": [
-        "*"
+      "@/app/*": [
+        "app/*"
+      ],
+      "@/domain/*": [
+        "domain/*"
+      ],
+      "@/infra/*": [
+        "infra/*"
       ]
     },
     "experimentalDecorators": true,
