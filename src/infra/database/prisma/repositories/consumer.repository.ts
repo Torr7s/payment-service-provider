@@ -4,14 +4,13 @@ import { PrismaService } from '../prisma.service';
 
 import { ConsumerRepository } from '@/app/repositories';
 
-import { ConsumerRepositoryFindByEmailNS, ConsumerRepositoryFindByIdNS } from '@/domain/contracts/repositories';
-import { CreateConsumerUseCaseNS } from '@/domain/use-cases/consumers';
+import { ConsumerRepositoryCreateNS, ConsumerRepositoryFindByEmailNS, ConsumerRepositoryFindByIdNS } from '@/domain/contracts/repositories';
 
 @Injectable()
 export class PrismaConsumerRepository implements ConsumerRepository {
   constructor(private prismaService: PrismaService ) {}
 
-  public async create(params: CreateConsumerUseCaseNS.Input): Promise<CreateConsumerUseCaseNS.Output> {
+  public async create(params: ConsumerRepositoryCreateNS.Input): Promise<ConsumerRepositoryCreateNS.Output> {
     return this.prismaService.consumer.create({
       data: {
         email: params.email,
