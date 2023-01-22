@@ -4,7 +4,7 @@ import { Decimal } from '@prisma/client/runtime';
 export class CreateTransactionDto {
   value: string | Decimal;
   description: string;
-  paymentMethod: string | PaymentMethod;
+  paymentMethod: PaymentMethod;
   cardNumber: string;
   cardOwnerName: string;
   cardExpirationDate: string | Date;
