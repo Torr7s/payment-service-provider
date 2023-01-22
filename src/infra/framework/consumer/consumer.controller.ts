@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
 import { Consumer } from '@prisma/client';
+import { Body, Controller, Post } from '@nestjs/common';
 
 import { CreateConsumerUseCase } from '@/app/use-cases/consumers';
+
 import { CreateConsumerDto } from '@/domain/dtos/consumer/create-consumer.dto';
 
 @Controller('consumers')
