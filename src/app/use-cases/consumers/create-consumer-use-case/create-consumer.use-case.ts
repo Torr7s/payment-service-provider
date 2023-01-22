@@ -6,7 +6,7 @@ import { CreatConsumerUseCaseDomain, CreateConsumerUseCaseNS } from '@/domain/us
 import { ConsumerRepository } from '@/app/repositories';
 
 export class CreateConsumerUseCase implements CreatConsumerUseCaseDomain {
-  constructor(private readonly repository: ConsumerRepository) { }
+  constructor(private readonly repository: ConsumerRepository) {}
 
   public async execute(params: CreateConsumerUseCaseNS.Input): Promise<CreateConsumerUseCaseNS.Output> {
     const consumerAlreadyRegistered: Consumer = (
