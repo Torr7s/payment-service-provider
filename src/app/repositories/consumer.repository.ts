@@ -1,5 +1,3 @@
-import { Consumer } from '@prisma/client';
-
 import { 
   ConsumerRepositoryCreateNS, 
   ConsumerRepositoryFindByEmailNS, 
@@ -9,6 +7,6 @@ import {
 
 export abstract class ConsumerRepository implements ConsumerRepositoryInterface {
   public abstract create(params: ConsumerRepositoryCreateNS.Input): Promise<ConsumerRepositoryCreateNS.Output>;
-  public abstract findByEmail: ({ email }: ConsumerRepositoryFindByEmailNS.Input) => Promise<Consumer>;
-  public abstract findById: ({ id }: ConsumerRepositoryFindByIdNS.Input) => Promise<Consumer>;
+  public abstract findByEmail: ({ email }: ConsumerRepositoryFindByEmailNS.Input) => Promise<ConsumerRepositoryFindByEmailNS.Output>;
+  public abstract findById: ({ id }: ConsumerRepositoryFindByIdNS.Input) => Promise<ConsumerRepositoryFindByIdNS.Output>;
 }
