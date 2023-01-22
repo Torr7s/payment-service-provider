@@ -7,6 +7,6 @@ export namespace CreateConsumerUseCaseNS {
   export type Output = Consumer;
 }
 
-export interface CreatConsumerUseCaseDomain {
+export interface CreateConsumerUseCaseInterface {
   execute: (params: CreateConsumerUseCaseNS.Input) => Promise<CreateConsumerUseCaseNS.Output>;
 }
