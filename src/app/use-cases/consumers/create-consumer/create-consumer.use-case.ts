@@ -5,6 +5,8 @@ import { ICreateConsumerUseCase, NSCreateConsumerUseCase } from '@/domain/use-ca
 
 import { ConsumerRepository } from '@/app/abstracts/repositories';
 
+import { hashString } from '@/infra/helpers/bcrypt';
+
 export class CreateConsumerUseCase implements ICreateConsumerUseCase {
   constructor(private readonly repository: ConsumerRepository) {}
 
@@ -21,6 +23,11 @@ export class CreateConsumerUseCase implements ICreateConsumerUseCase {
       });
     }
 
-    return this.repository.create(params);
+    const hashedPassword: string = await hashString(params.password);
+
+    return this.repository.create({
+      ...params,
+      password: hashedPassword
+    });
   }
 }
