@@ -9,8 +9,6 @@ import {
   MinLength 
 } from 'class-validator';
 
-import { CheckPaymentMethod } from '@/core/decorators';
-
 export class CreateTransactionDto {
   @IsDecimal()
   @IsNotEmpty()
@@ -19,8 +17,8 @@ export class CreateTransactionDto {
   @IsString()
   @IsNotEmpty()
   description: string;
-  
-  @CheckPaymentMethod(PaymentMethod, { each: true })
+
+  @IsString()
   @IsNotEmpty()
   paymentMethod: PaymentMethod;
   
