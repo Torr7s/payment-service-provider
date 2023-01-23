@@ -2,15 +2,19 @@ import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma.service';
 
-import { ConsumerRepository } from '@/app/repositories';
+import { ConsumerRepository } from '@/app/abstracts/repositories';
 
-import { ConsumerRepositoryCreateNS, ConsumerRepositoryFindByEmailNS, ConsumerRepositoryFindByIdNS } from '@/domain/contracts/repositories';
+import { 
+  NSConsumerRepositoryCreate, 
+  NSConsumerRepositoryFindByEmail, 
+  NSConsumerRepositoryFindById 
+} from '@/domain/contracts/repositories';
 
 @Injectable()
 export class PrismaConsumerRepository implements ConsumerRepository {
   constructor(private prismaService: PrismaService ) {}
 
-  public async create(params: ConsumerRepositoryCreateNS.Input): Promise<ConsumerRepositoryCreateNS.Output> {
+  public async create(params: NSConsumerRepositoryCreate.Input): Promise<NSConsumerRepositoryCreate.Output> {
     return this.prismaService.consumer.create({
       data: {
         email: params.email,
@@ -19,7 +23,7 @@ export class PrismaConsumerRepository implements ConsumerRepository {
     });
   } 
 
-  public async findByEmail({ email }: ConsumerRepositoryFindByEmailNS.Input): Promise<ConsumerRepositoryFindByEmailNS.Output> {
+  public async findByEmail({ email }: NSConsumerRepositoryFindByEmail.Input): Promise<NSConsumerRepositoryFindByEmail.Output> {
     return this.prismaService.consumer.findUnique({
       where: {
         email
@@ -27,7 +31,7 @@ export class PrismaConsumerRepository implements ConsumerRepository {
     });
   }
 
-  public async findById({ id }: ConsumerRepositoryFindByIdNS.Input): Promise<ConsumerRepositoryFindByIdNS.Output> {
+  public async findById({ id }: NSConsumerRepositoryFindById.Input): Promise<NSConsumerRepositoryFindById.Output> {
     return this.prismaService.consumer.findUnique({
       where: {
         id

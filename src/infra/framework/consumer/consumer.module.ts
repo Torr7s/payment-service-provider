@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { ConsumerController } from './consumer.controller';
 
-import { ConsumerRepository } from '@/app/repositories/consumer.repository';
+import { ConsumerRepository } from '@/app/abstracts/repositories/consumer.repository';
 import { CreateConsumerUseCase } from '@/app/use-cases/consumers';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';

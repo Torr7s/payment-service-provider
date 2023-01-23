@@ -2,15 +2,18 @@ import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma.service';
 
-import { TransactionRepository } from '@/app/repositories/transaction.repository';
+import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 
-import { TransactionRepositoryCreateNS, TransactionRepositoryFindByIdNS } from '@/domain/contracts/repositories';
+import { 
+  NSTransactionRepositoryCreate, 
+  NSTransactionRepositoryFindById 
+} from '@/domain/contracts/repositories';
 
 @Injectable()
 export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private prismaService: PrismaService) {}
 
-  public async create(params: TransactionRepositoryCreateNS.Input): Promise<TransactionRepositoryCreateNS.Output> {
+  public async create(params: NSTransactionRepositoryCreate.Input): Promise<NSTransactionRepositoryCreate.Output> {
     return this.prismaService.transaction.create({
       data: {
         value: params.value,
@@ -24,7 +27,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
     });
   }
 
-  public async findById({ id }: TransactionRepositoryFindByIdNS.Input): Promise<TransactionRepositoryFindByIdNS.Output> {
+  public async findById({ id }: NSTransactionRepositoryFindById.Input): Promise<NSTransactionRepositoryFindById.Output> {
     return this.prismaService.transaction.findUnique({
       where: {
         id

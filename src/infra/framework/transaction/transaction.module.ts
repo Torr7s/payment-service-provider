@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { TransactionController } from './transaction.controller';
 
-import { TransactionRepository } from '@/app/repositories/transaction.repository';
+import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
