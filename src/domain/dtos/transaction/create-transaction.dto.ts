@@ -9,7 +9,7 @@ import {
   MinLength 
 } from 'class-validator';
 
-import { CheckPaymentMethod } from '@/core/@decorators';
+import { CheckPaymentMethod } from '@/core/decorators';
 
 export class CreateTransactionDto {
   @IsDecimal()
