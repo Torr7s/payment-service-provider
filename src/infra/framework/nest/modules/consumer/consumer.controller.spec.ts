@@ -12,6 +12,7 @@ describe('ConsumerController', (): void => {
 
   const fullName: string = 'John Doe';
   const email: string = 'johndoe@gmail.com';
+  const password: string = 'youshallnotpass';
 
   beforeEach(async (): Promise<void> => {
     const consumerModule: TestingModule = await Test.createTestingModule({
@@ -39,7 +40,8 @@ describe('ConsumerController', (): void => {
   it('should create a new consumer', async (): Promise<void> => {
     const consumer = await consumerController.create({
       fullName, 
-      email
+      email,
+      password
     });
 
     expect(consumer).toHaveProperty('id');
