@@ -18,7 +18,8 @@ export class PrismaConsumerRepository implements ConsumerRepository {
     return this.prismaService.consumer.create({
       data: {
         email: params.email,
-        fullName: params.fullName
+        fullName: params.fullName,
+        password: params.password
       }
     });
   } 
