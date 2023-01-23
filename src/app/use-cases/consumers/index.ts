@@ -1,1 +1,1 @@
-export * from './create-consumer-use-case';
+export * from './create-consumer';

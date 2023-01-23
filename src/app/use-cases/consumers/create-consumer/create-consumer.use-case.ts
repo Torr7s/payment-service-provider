@@ -1,14 +1,14 @@
 import { Consumer } from '@prisma/client';
 import { BadRequestException } from '@nestjs/common';
 
-import { CreateConsumerUseCaseInterface, CreateConsumerUseCaseNS } from '@/domain/use-cases/consumers';
+import { ICreateConsumerUseCase, NSCreateConsumerUseCase } from '@/domain/use-cases/consumers';
 
-import { ConsumerRepository } from '@/app/repositories';
+import { ConsumerRepository } from '@/app/abstracts/repositories';
 
-export class CreateConsumerUseCase implements CreateConsumerUseCaseInterface {
+export class CreateConsumerUseCase implements ICreateConsumerUseCase {
   constructor(private readonly repository: ConsumerRepository) {}
 
-  public async execute(params: CreateConsumerUseCaseNS.Input): Promise<CreateConsumerUseCaseNS.Output> {
+  public async execute(params: NSCreateConsumerUseCase.Input): Promise<NSCreateConsumerUseCase.Output> {
     const consumerAlreadyRegistered: Consumer = (
       await this.repository.findByEmail({
         email: params.email
