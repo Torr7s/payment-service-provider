@@ -13,7 +13,6 @@ import { CheckPaymentMethod } from '@/core/decorators';
 
 export class CreateTransactionDto {
   @IsDecimal()
-  @IsString()
   @IsNotEmpty()
   value: string | Prisma.Decimal;
 
