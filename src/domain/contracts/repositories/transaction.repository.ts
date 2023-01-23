@@ -2,19 +2,19 @@ import { Transaction } from '@prisma/client';
 
 import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
 
-export namespace TransactionRepositoryCreateNS {
+export namespace NSTransactionRepositoryCreate {
   export type Input = CreateTransactionDto;
   export type Output = Transaction;
 }
 
-export namespace TransactionRepositoryFindByIdNS {
+export namespace NSTransactionRepositoryFindById {
   export type Input = {
     id: string;
   }
   export type Output = Transaction;
 }
 
-export interface TransactionRepositoryInterface {
-  create: (params: TransactionRepositoryCreateNS.Input) => Promise<TransactionRepositoryCreateNS.Output>;
-  findById: ({ id }: TransactionRepositoryFindByIdNS.Input) => Promise<TransactionRepositoryFindByIdNS.Output>;
+export interface ITransactionRepository {
+  create: (params: NSTransactionRepositoryCreate.Input) => Promise<NSTransactionRepositoryCreate.Output>;
+  findById: ({ id }: NSTransactionRepositoryFindById.Input) => Promise<NSTransactionRepositoryFindById.Output>;
 }

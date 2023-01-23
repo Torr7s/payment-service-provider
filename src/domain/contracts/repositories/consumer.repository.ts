@@ -2,27 +2,27 @@ import { Consumer } from '@prisma/client';
 
 import { CreateConsumerDto } from '@/domain/dtos/consumer/create-consumer.dto';
 
-export namespace ConsumerRepositoryCreateNS {
+export namespace NSConsumerRepositoryCreate {
   export type Input = CreateConsumerDto;
   export type Output = Consumer;
 }
 
-export namespace ConsumerRepositoryFindByEmailNS {
+export namespace NSConsumerRepositoryFindByEmail {
   export type Input = {
     email: string;
-  };
+  }
   export type Output = Consumer;
 }
 
-export namespace ConsumerRepositoryFindByIdNS {
+export namespace NSConsumerRepositoryFindById {
   export type Input = {
     id: string;
-  };
+  }
   export type Output = Consumer;
 }
 
-export interface ConsumerRepositoryInterface {
-  create: (params: ConsumerRepositoryCreateNS.Input) => Promise<ConsumerRepositoryCreateNS.Output>;
-  findByEmail: ({ email}: ConsumerRepositoryFindByEmailNS.Input) => Promise<ConsumerRepositoryFindByEmailNS.Output>; 
-  findById: ({ id }: ConsumerRepositoryFindByIdNS.Input) => Promise<ConsumerRepositoryFindByIdNS.Output>; 
+export interface IConsumerRepository {
+  create: (params: NSConsumerRepositoryCreate.Input) => Promise<NSConsumerRepositoryCreate.Output>;
+  findByEmail: ({ email}: NSConsumerRepositoryFindByEmail.Input) => Promise<NSConsumerRepositoryFindByEmail.Output>; 
+  findById: ({ id }: NSConsumerRepositoryFindById.Input) => Promise<NSConsumerRepositoryFindById.Output>; 
 }
