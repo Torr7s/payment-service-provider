@@ -14,7 +14,15 @@ export namespace NSTransactionRepositoryFindById {
   export type Output = Transaction;
 }
 
+export namespace NSTransactionRepositoryList {
+  export type Input = {
+    consumerId: string;
+  }
+  export type Output = Transaction[];
+}
+
 export interface ITransactionRepository {
   create: (params: NSTransactionRepositoryCreate.Input) => Promise<NSTransactionRepositoryCreate.Output>;
   findById: ({ id }: NSTransactionRepositoryFindById.Input) => Promise<NSTransactionRepositoryFindById.Output>;
+  list: ({ consumerId }: NSTransactionRepositoryList.Input) => Promise<NSTransactionRepositoryList.Output>;
 }
