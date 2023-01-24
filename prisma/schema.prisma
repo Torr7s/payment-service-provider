@@ -26,7 +26,7 @@ model Consumer {
 
   transactions Transaction[]
   payables     Payable[]
-
+  
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @default(now()) @updatedAt
 
@@ -43,8 +43,8 @@ model Transaction {
   cardExpirationDate   DateTime
   cardCVV              String
 
-  consumer             Consumer? @relation(fields: [consumerId], references: [id])
-  consumerId           String?    @unique
+  consumer             Consumer?  @relation(fields: [consumerId], references: [id])
+  consumerId           String?    
   
   payables             Payable?
 
@@ -60,10 +60,10 @@ model Payable {
   paymentDate   DateTime?     @db.Date
   fee           Decimal?      @db.Decimal(9, 2)
   
-  consumer      Consumer?    @relation(fields: [consumerId], references: [id])
+  consumer      Consumer?     @relation(fields: [consumerId], references: [id])
   consumerId    String
   
-  transaction   Transaction? @relation(fields: [transactionId], references: [id])
+  transaction   Transaction?  @relation(fields: [transactionId], references: [id])
   transactionId String        @unique
 
   createdAt     DateTime      @default(now())
