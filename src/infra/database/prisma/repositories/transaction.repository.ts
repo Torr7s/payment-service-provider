@@ -6,7 +6,8 @@ import { TransactionRepository } from '@/app/abstracts/repositories/transaction.
 
 import { 
   NSTransactionRepositoryCreate, 
-  NSTransactionRepositoryFindById 
+  NSTransactionRepositoryFindById,
+  NSTransactionRepositoryList
 } from '@/domain/contracts/repositories';
 
 @Injectable()
@@ -15,15 +16,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
 
   public async create(params: NSTransactionRepositoryCreate.Input): Promise<NSTransactionRepositoryCreate.Output> {
     return this.prismaService.transaction.create({
-      data: {
-        value: params.value,
-        description: params.description,
-        paymentMethod: params.paymentMethod,
-        cardNumber: params.cardNumber,
-        cardOwnerName: params.cardOwnerName,
-        cardExpirationDate: params.cardExpirationDate,
-        cardCVV: params.cardCVV
-      }
+      data: params
     });
   }
 
@@ -33,5 +26,13 @@ export class PrismaTransactionRepository implements TransactionRepository {
         id
       }
     });
-  };
+  }
+
+  public async list({ consumerId }: NSTransactionRepositoryList.Input): Promise<NSTransactionRepositoryList.Output> {
+    return await this.prismaService.transaction.findMany({
+      where: {
+        consumerId
+      }
+    });
+  }
 }
