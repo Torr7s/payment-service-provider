@@ -19,55 +19,55 @@ enum PayableStatus {
 }
 
 model Consumer {
-  id           String         @id @default(uuid())
+  id           String        @id @default(uuid())
   fullName     String
-  email        String         @unique
+  email        String        @unique
   password     String
-
+  
   transactions Transaction[]
   payables     Payable[]
   
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @default(now()) @updatedAt
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now()) @updatedAt
 
   @@map("consumers")
 }
 
 model Transaction {
-  id                   String     @id @default(uuid())
-  value                Decimal    @db.Decimal(9, 2)
-  description          String
-  paymentMethod        PaymentMethod
-  cardNumber           String
-  cardOwnerName        String
-  cardExpirationDate   DateTime
-  cardCVV              String
+  id                 String        @id @default(uuid())
+  value              Decimal       @db.Decimal(9, 2)
+  description        String
+  paymentMethod      PaymentMethod
+  cardNumber         String
+  cardOwnerName      String
+  cardExpirationDate DateTime
+  cardCVV            String
 
-  consumer             Consumer?  @relation(fields: [consumerId], references: [id])
-  consumerId           String?    
+  consumer           Consumer?     @relation(fields: [consumerId], references: [id])
+  consumerId         String?
   
-  payables             Payable?
-
-  createdAt            DateTime   @default(now())
-  updatedAt            DateTime   @default(now()) @updatedAt
+  payables           Payable?
+  
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @default(now()) @updatedAt
 
   @@map("transactions")
 }
 
 model Payable {
-  id            String        @id @default(uuid())
+  id            String         @id @default(uuid())
   status        PayableStatus?
-  paymentDate   DateTime?     @db.Date
-  fee           Decimal?      @db.Decimal(9, 2)
-  
-  consumer      Consumer?     @relation(fields: [consumerId], references: [id])
+  paymentDate   DateTime?      @db.Date
+  fee           Decimal?       @db.Decimal(9, 2)
+
+  consumer      Consumer?      @relation(fields: [consumerId], references: [id])
   consumerId    String
   
-  transaction   Transaction?  @relation(fields: [transactionId], references: [id])
-  transactionId String        @unique
-
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @default(now()) @updatedAt
+  transaction   Transaction?   @relation(fields: [transactionId], references: [id])
+  transactionId String         @unique
+  
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
 
   @@map("payables")
 }
