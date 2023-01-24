@@ -1,5 +1,3 @@
-import { Injectable } from '@nestjs/common';
-
 import { PrismaService } from '../prisma.service';
 
 import { ConsumerRepository } from '@/app/abstracts/repositories';
@@ -10,7 +8,6 @@ import {
   NSConsumerRepositoryFindById 
 } from '@/domain/contracts/repositories';
 
-@Injectable()
 export class PrismaConsumerRepository implements ConsumerRepository {
   constructor(private prismaService: PrismaService ) {}
 

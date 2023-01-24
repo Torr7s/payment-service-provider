@@ -1,5 +1,3 @@
-import { Injectable } from '@nestjs/common';
-
 import { PrismaService } from '../prisma.service';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
@@ -10,7 +8,6 @@ import {
   NSTransactionRepositoryList
 } from '@/domain/contracts/repositories';
 
-@Injectable()
 export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private prismaService: PrismaService) {}
 
