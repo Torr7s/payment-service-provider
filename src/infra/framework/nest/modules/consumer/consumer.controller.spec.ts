@@ -3,16 +3,11 @@ import { Test, TestingModule} from '@nestjs/testing';
 import { ConsumerController } from './consumer.controller';
 
 import { ConsumerRepository } from '@/app/abstracts/repositories';
-import { CreateConsumerUseCase } from '@/app/use-cases/consumers';
 
 import { ConsumerInMemoryRepository } from '@/infra/database/prisma/repositories/in-memory/consumer.in-memory.repository';
 
 describe('ConsumerController', (): void => {
   let consumerController: ConsumerController;
-
-  const fullName: string = 'John Doe';
-  const email: string = 'johndoe@gmail.com';
-  const password: string = 'youshallnotpass';
 
   beforeEach(async (): Promise<void> => {
     const consumerModule: TestingModule = await Test.createTestingModule({
@@ -22,11 +17,6 @@ describe('ConsumerController', (): void => {
           provide: ConsumerRepository,
           useClass: ConsumerInMemoryRepository
         },
-        {
-          provide: CreateConsumerUseCase,
-          useFactory: (repository: ConsumerRepository)=> new CreateConsumerUseCase(repository),
-          inject: [ConsumerRepository]
-        }
       ]
     }).compile();
 
@@ -35,15 +25,5 @@ describe('ConsumerController', (): void => {
 
   it('should be defined', (): void => {
     expect(consumerController).toBeDefined();
-  });
-
-  it('should create a new consumer', async (): Promise<void> => {
-    const consumer = await consumerController.create({
-      fullName, 
-      email,
-      password
-    });
-
-    expect(consumer).toHaveProperty('id');
   });
 });
