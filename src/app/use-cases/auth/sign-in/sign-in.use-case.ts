@@ -12,20 +12,20 @@ export class AuthSignInUseCase implements IAuthSignInUseCase {
   constructor(private readonly findUserByEmailUseCase: IFindUserByEmailUseCase) {}
 
   public async exec(signInDto: SignInDto): Promise<User> {
-    const consumer: User = await this.findUserByEmailUseCase.exec(signInDto.email);
+    const user: User = await this.findUserByEmailUseCase.exec(signInDto.email);
 
-    if (!consumer) {
+    if (!user) {
       throw new UnauthorizedException(
         'Invalid credentials'
       );
     }
 
-    if (!(await compareStrings(signInDto.password, consumer.password))) {
+    if (!(await compareStrings(signInDto.password, user.password))) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    delete consumer.password;
+    delete user.password;
 
-    return consumer;
+    return user;
   }
 }

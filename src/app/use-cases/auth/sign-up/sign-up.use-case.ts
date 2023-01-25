@@ -17,9 +17,9 @@ export class AuthSignUpUseCase implements IAuthSignUpUseCase {
   ) {}
 
   public async exec(signUpDto: SignUpDto): Promise<User> {
-    const userRecord: User = await this.findUserByEmailUseCase.exec(signUpDto.email);
+    const userAlreadyExists: User = await this.findUserByEmailUseCase.exec(signUpDto.email);
 
-    if (userRecord) {
+    if (userAlreadyExists) {
       throw new UnauthorizedException('Invalid registration', {
         description: 'Email already taken'
       });
