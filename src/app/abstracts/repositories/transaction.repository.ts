@@ -1,12 +1,10 @@
-import { 
-  ITransactionRepository,
-  NSTransactionRepositoryCreate, 
-  NSTransactionRepositoryFindById, 
-  NSTransactionRepositoryList
-} from '@/domain/contracts/repositories';
+import { Transaction } from '@prisma/client';
+
+import { CreateTransactionDto } from '@/domain/dtos/transaction';
+import { ITransactionRepository } from '@/domain/repositories/transaction.repository';
 
 export abstract class TransactionRepository implements ITransactionRepository {
-  public abstract create: (params: NSTransactionRepositoryCreate.Input) => Promise<NSTransactionRepositoryCreate.Output>;
-  public abstract findById: ({ id }: NSTransactionRepositoryFindById.Input) => Promise<NSTransactionRepositoryCreate.Output>;
-  public abstract list: ({ consumerId }: NSTransactionRepositoryList.Input) => Promise<NSTransactionRepositoryList.Output>;
+  public abstract create: (createTransactionDto: CreateTransactionDto) => Promise<Transaction>;
+  public abstract findById: (id: string) => Promise<Transaction>;
+  public abstract listConsumerTransactions: (consumerId: string) => Promise<Transaction[]>;
 }

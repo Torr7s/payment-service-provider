@@ -1,11 +1,13 @@
+import { Transaction } from '@prisma/client';
+
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 
-import { IListTransactionsUseCase, NSListTransactionsUseCase } from '@/domain/use-cases/transactions/list-transactions.use-case';
+import { IListConsumerTransactionsUseCase } from '@/domain/use-cases/transactions';
 
-export class ListTransactionsUseCase implements IListTransactionsUseCase {
+export class ListTransactionsUseCase implements IListConsumerTransactionsUseCase {
   constructor(private readonly repository: TransactionRepository) {}
 
-  public async execute({ consumerId }: NSListTransactionsUseCase.Input): Promise<NSListTransactionsUseCase.Output> {
-    return this.repository.list({ consumerId });
+  public async exec(consumerId: string): Promise<Transaction[]> {
+    return this.repository.listConsumerTransactions(consumerId);
   }
 }
