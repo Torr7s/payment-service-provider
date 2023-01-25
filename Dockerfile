@@ -1,16 +1,19 @@
-FROM node:18.12.0-slim
+## Development Stage
+
+FROM node:18.12.0-slim AS development
 
 WORKDIR /usr/app
 
-COPY package*.json ./
-COPY .env         ./
+COPY ["package*.json", "yarn.lock", "./"]
 
-RUN yarn
+ENV NODE_ENV=development
 
-COPY . .
+RUN yarn install --frozen-lockfile
+
+COPY . . 
 
 RUN yarn prisma generate
 
 EXPOSE 3000
 
-CMD ["yarn", "dev"]
+CMD ["yarn", "start:dev"]

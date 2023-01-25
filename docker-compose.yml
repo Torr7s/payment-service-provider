@@ -2,29 +2,34 @@ version: "3.9"
 
 services:
   database:
+    container_name: database
     image: postgres:latest
-    container_name: pagar-me_db
     restart: always
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DATABASE}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   app:
+    container_name: app
     build: 
       context: .
       dockerfile: Dockerfile
-    container_name: pagar-me_app
-    command: yarn dev
-    ports:
-      - "3000:3000"
-      - "9229:9229"
+      target: development
+    command: yarn start:dev
+    restart: always
+    env_file:
+      - .dev.env
     volumes:
       - .:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+      - 9229:9229
     links:
       - database
     depends_on:
