@@ -1,23 +1,21 @@
+import { Transaction } from '@prisma/client';
+
 import { PrismaService } from '../prisma.service';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 
-import { 
-  NSTransactionRepositoryCreate, 
-  NSTransactionRepositoryFindById,
-  NSTransactionRepositoryList
-} from '@/domain/contracts/repositories';
+import { CreateTransactionDto } from '@/domain/dtos/transaction';
 
 export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private prismaService: PrismaService) {}
 
-  public async create(params: NSTransactionRepositoryCreate.Input): Promise<NSTransactionRepositoryCreate.Output> {
+  public async create(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     return this.prismaService.transaction.create({
-      data: params
+      data: createTransactionDto
     });
   }
 
-  public async findById({ id }: NSTransactionRepositoryFindById.Input): Promise<NSTransactionRepositoryFindById.Output> {
+  public async findById(id: string): Promise<Transaction> {
     return this.prismaService.transaction.findUnique({
       where: {
         id
@@ -25,7 +23,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
     });
   }
 
-  public async list({ consumerId }: NSTransactionRepositoryList.Input): Promise<NSTransactionRepositoryList.Output> {
+  public async listConsumerTransactions(consumerId: string): Promise<Transaction[]> {
     return await this.prismaService.transaction.findMany({
       where: {
         consumerId
