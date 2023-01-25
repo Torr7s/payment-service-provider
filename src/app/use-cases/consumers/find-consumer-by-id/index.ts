@@ -1,0 +1,1 @@
+export * from './find-consumer-by-id.use-case';

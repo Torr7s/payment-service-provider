@@ -8,5 +8,5 @@ export namespace NSFindConsumerByIdUseCase {
 }
 
 export interface IFindConsumerByIdUseCase {
-  findById: ({ id }: NSFindConsumerByIdUseCase.Input) => Promise<NSFindConsumerByIdUseCase.Output>;
+  execute: ({ id }: NSFindConsumerByIdUseCase.Input) => Promise<NSFindConsumerByIdUseCase.Output>;
 }

@@ -8,5 +8,5 @@ export namespace NSFindConsumerByEmailUseCase {
 }
 
 export interface IFindConsumerByEmailUseCase {
-  findByEmail: ({ email }: NSFindConsumerByEmailUseCase.Input) => Promise<NSFindConsumerByEmailUseCase.Output>;
+  execute: ({ email }: NSFindConsumerByEmailUseCase.Input) => Promise<NSFindConsumerByEmailUseCase.Output>;
 }
