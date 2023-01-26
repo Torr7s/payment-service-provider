@@ -1,7 +1,7 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { User } from '@prisma/client';
 
-import { AuthenticationRepository } from '@/app/abstracts/repositories/authentication.repository';
+import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 import { SignUpDto } from '@/domain/dtos/authentication/sign-up.dto';
@@ -12,7 +12,7 @@ import { hashString } from '@/infra/helpers/bcrypt';
 
 export class AuthSignUpUseCase implements IAuthSignUpUseCase {
   constructor(
-    private readonly authRepository: AuthenticationRepository,
+    private readonly authRepository: AuthRepository,
     private readonly userRepository: UserRepository
   ) {}
 

@@ -4,6 +4,6 @@ import { IAuthenticationRepository } from '@/domain/repositories/authentication.
 
 import { SignUpDto } from '@/domain/dtos/authentication';
 
-export abstract class AuthenticationRepository implements IAuthenticationRepository {
+export abstract class AuthRepository implements IAuthenticationRepository {
   public abstract signUp: (signUpDto: SignUpDto) => Promise<User>;
 }
