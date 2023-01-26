@@ -8,7 +8,8 @@ import {
   Post 
 } from '@nestjs/common';
 
-import { CreateTransactionUseCase, ListTransactionsUseCase } from '@/app/use-cases/transactions';
+import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
+import { ListTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
 
 import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
 
@@ -21,11 +22,11 @@ export class TransactionController {
 
   @Post()
   public async create(@Body() createTransactionDto: CreateTransactionDto): Promise<Transaction> {
-    return this.createTransactionUseCase.execute(createTransactionDto);
+    return this.createTransactionUseCase.exec(createTransactionDto);
   }
 
   @Get(':consumerId')
   public async list(@Param('consumerId', new ParseUUIDPipe()) consumerId: string): Promise<Transaction[]> {
-    return this.listTransactionsUseCase.execute({ consumerId });
+    return this.listTransactionsUseCase.exec(consumerId);
   }
 }
