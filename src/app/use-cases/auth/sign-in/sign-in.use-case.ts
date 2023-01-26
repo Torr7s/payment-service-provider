@@ -1,18 +1,18 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { User } from '@prisma/client';
 
-import { IAuthSignInUseCase } from '@/domain/use-cases/auth';
-import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
+import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
+import { IAuthSignInUseCase } from '@/domain/use-cases/auth';
 import { SignInDto } from '@/domain/dtos/authentication/sign-in.dto';
 
 import { compareStrings } from '@/infra/helpers/bcrypt';
 
 export class AuthSignInUseCase implements IAuthSignInUseCase {
-  constructor(private readonly findUserByEmailUseCase: IFindUserByEmailUseCase) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   public async exec(signInDto: SignInDto): Promise<User> {
-    const user: User = await this.findUserByEmailUseCase.exec(signInDto.email);
+    const user: User = await this.userRepository.findByEmail(signInDto.email);
 
     if (!user) {
       throw new UnauthorizedException(
