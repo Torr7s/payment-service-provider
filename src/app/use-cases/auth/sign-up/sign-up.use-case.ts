@@ -2,22 +2,22 @@ import { UnauthorizedException } from '@nestjs/common';
 import { User } from '@prisma/client';
 
 import { AuthenticationRepository } from '@/app/abstracts/repositories/authentication.repository';
+import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 import { SignUpDto } from '@/domain/dtos/authentication/sign-up.dto';
 
 import { IAuthSignUpUseCase } from '@/domain/use-cases/auth';
-import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
 
 import { hashString } from '@/infra/helpers/bcrypt';
 
 export class AuthSignUpUseCase implements IAuthSignUpUseCase {
   constructor(
     private readonly authRepository: AuthenticationRepository,
-    private readonly findUserByEmailUseCase: IFindUserByEmailUseCase
+    private readonly userRepository: UserRepository
   ) {}
 
   public async exec(signUpDto: SignUpDto): Promise<User> {
-    const userAlreadyExists: User = await this.findUserByEmailUseCase.exec(signUpDto.email);
+    const userAlreadyExists: User = await this.userRepository.findByEmail(signUpDto.email);
 
     if (userAlreadyExists) {
       throw new UnauthorizedException('Invalid registration', {
