@@ -13,22 +13,7 @@ import { PrismaTransactionRepository } from '@/infra/database/prisma/repositorie
 @Module({
   controllers: [TransactionController],
   providers: [
-    PrismaService,
-    {
-      provide: TransactionRepository,
-      useFactory: (prismaService: PrismaService): PrismaTransactionRepository => new PrismaTransactionRepository(prismaService),
-      inject: [PrismaService]
-    },
-    {
-      provide: CreateTransactionUseCase,
-      useFactory: (repository: TransactionRepository): CreateTransactionUseCase => new CreateTransactionUseCase(repository),
-      inject: [TransactionRepository]
-    },
-    {
-      provide: ListTransactionsUseCase,
-      useFactory: (repository: TransactionRepository): ListTransactionsUseCase => new ListTransactionsUseCase(repository),
-      inject: [TransactionRepository]
-    }
+
   ]
 })
 export class TransactionModule {}
