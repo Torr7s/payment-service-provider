@@ -2,7 +2,7 @@ import { Test, TestingModule} from '@nestjs/testing';
 
 import { ConsumerController } from './consumer.controller';
 
-import { ConsumerRepository } from '@/app/abstracts/repositories';
+import { ConsumerRepository } from '@/app/abstracts/repositories/consumer.repository';
 
 import { ConsumerInMemoryRepository } from '@/infra/database/prisma/repositories/in-memory/consumer.in-memory.repository';
 
