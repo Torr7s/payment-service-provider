@@ -31,6 +31,8 @@ services:
       - 9229:9229
     depends_on:
       - database
+    links:
+      - database
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DATABASE}?schema=public
 
