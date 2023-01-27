@@ -1,5 +1,9 @@
 import { Provider } from '@nestjs/common';
 
+import { JwtStrategy } from '../../modules/auth/strategies/jwt.strategy';
+import { LocalStrategy } from '../../modules/auth/strategies/local.strategy';
+import { SessionSerializer } from '../../modules/auth/session.serializer';
+
 import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
@@ -7,12 +11,15 @@ import { AuthSignInUseCase } from '@/app/use-cases/auth/sign-in';
 import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
 import { FindUserByEmailUseCase } from '@/app/use-cases/users/find-user-by-email';
 
+import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
+
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
 import { PrismaAuthRepository } from '@/infra/database/prisma/repositories/auth.repository';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.repository';
+import { AuthUseCase } from '@/app/use-cases/auth/auth';
 
-export const AppModuleProviders: Provider[] = [
+export const AuthModuleProviders: Provider[] = [
   PrismaService,
   {
     provide: AuthRepository,
@@ -32,7 +39,7 @@ export const AppModuleProviders: Provider[] = [
   {
     provide: AuthSignInUseCase,
     useFactory: (userRepository: UserRepository): AuthSignInUseCase => new AuthSignInUseCase(userRepository),
-    inject: [FindUserByEmailUseCase]
+    inject: [UserRepository]
   },
   {
     provide: AuthSignUpUseCase,
@@ -43,5 +50,11 @@ export const AppModuleProviders: Provider[] = [
       );
     },
     inject: [AuthRepository, UserRepository]
-  }
+  },
+  {
+    provide: AuthUseCase,
+    useFactory: (findUserByEmailUseCase: IFindUserByEmailUseCase) => new AuthUseCase(findUserByEmailUseCase),
+    inject: [FindUserByEmailUseCase]
+  },
+  LocalStrategy, JwtStrategy, SessionSerializer
 ];
