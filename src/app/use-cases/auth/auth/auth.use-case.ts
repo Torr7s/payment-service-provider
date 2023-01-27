@@ -3,12 +3,12 @@ import { User } from '@prisma/client';
 
 import { JwtPayload } from '@/core/@types';
 
-import { IAuthAuthenticateUseCase } from '@/domain/use-cases/auth';
+import { IAuthUseCase } from '@/domain/use-cases/auth';
 import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
 
 import { signToken as signTokenHelper } from '@/infra/helpers/jwt/jwt.helper';
 
-export class AuthAuthenticateUseCase implements IAuthAuthenticateUseCase {
+export class AuthUseCase implements IAuthUseCase {
   constructor(private readonly findUserByEmailUseCase: IFindUserByEmailUseCase) {}
 
   public signToken(user: User): string {
