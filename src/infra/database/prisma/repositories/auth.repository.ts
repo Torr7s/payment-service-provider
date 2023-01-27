@@ -10,10 +10,20 @@ export class PrismaAuthRepository implements AuthRepository {
   constructor(private prismaService: PrismaService) {}
 
   public async signUp(signUpDto: SignUpDto): Promise<User> {
-    return this.prismaService.user.create({
+    const user: User = await this.prismaService.user.create({
+      data: signUpDto,
+    });
+
+    await this.prismaService.consumer.create({
       data: {
-        ...signUpDto
+        userProfile: {
+          connect: {
+            id: user.id
+          }
+        }
       }
     });
+
+    return user;
   }
 } 
