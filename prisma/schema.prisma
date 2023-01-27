@@ -35,8 +35,8 @@ model User {
 model Consumer {
   id           String        @id @default(uuid())
 
-  userProfile  User @relation(fields: [userId], references: [id])
-  userId       String @unique
+  userProfile  User          @relation(fields: [userId], references: [id])
+  userId       String        @unique
 
   transactions Transaction[]
   payables     Payable[]
@@ -56,9 +56,12 @@ model Transaction {
   cardOwnerName      String
   cardExpirationDate DateTime
   cardCVV            String
+
   consumer           Consumer?     @relation(fields: [consumerId], references: [id])
   consumerId         String?
+  
   payables           Payable?
+  
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @default(now()) @updatedAt
 
