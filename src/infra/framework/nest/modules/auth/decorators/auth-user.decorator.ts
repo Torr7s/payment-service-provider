@@ -8,4 +8,4 @@ export const AuthUser = createParamDecorator(
 
     return data ? user && user[data] : user;
   }
-)
+);
