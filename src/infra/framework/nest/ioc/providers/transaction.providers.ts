@@ -1,6 +1,9 @@
 import { Provider } from '@nestjs/common';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
+import { UserRepository } from '@/app/abstracts/repositories/user.repository';
+
+import { AuthUseCase } from '@/app/use-cases/auth/auth';
 
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
 import { ListTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
@@ -8,6 +11,7 @@ import { ListTransactionsUseCase } from '@/app/use-cases/transactions/list-trans
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
 import { PrismaTransactionRepository } from '@/infra/database/prisma/repositories/transaction.repository';
+import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.repository';
 
 export const TransactionModuleProviders: Provider[] = [
   PrismaService,
@@ -16,6 +20,18 @@ export const TransactionModuleProviders: Provider[] = [
     useFactory: (prismaService: PrismaService): PrismaTransactionRepository => 
       new PrismaTransactionRepository(prismaService),
     inject: [PrismaService]
+  },
+  {
+    provide: UserRepository,
+    useFactory: (prismaService: PrismaService): PrismaUserRepository =>
+      new PrismaUserRepository(prismaService),
+    inject: [PrismaService]
+  },
+  {
+    provide: AuthUseCase,
+    useFactory: (userRepository: UserRepository): AuthUseCase => 
+      new AuthUseCase(userRepository),
+    inject: [UserRepository]
   },
   {
     provide: CreateTransactionUseCase,
