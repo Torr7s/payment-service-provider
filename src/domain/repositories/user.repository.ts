@@ -1,4 +1,3 @@
-import { User } from '@prisma/client';
 import { UserEntity } from '../entities/user.entity';
 
 export interface IUserRepository {
