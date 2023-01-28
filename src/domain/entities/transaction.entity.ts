@@ -2,6 +2,7 @@ import { PaymentMethod, Prisma } from '@prisma/client';
 import { DecimalJsLike } from '@prisma/client/runtime';
 
 import { ConsumerEntity } from './consumer.entity';
+import { PayableEntity } from './payable.entity';
 
 export class TransactionEntity {
   id?: string;
@@ -13,7 +14,7 @@ export class TransactionEntity {
   cardExpirationDate: string | Date;
   cardCVV: string;
   consumer: ConsumerEntity;
-  payables: any;
+  payable: PayableEntity;
   createdAt?: string | Date;
   updatedAt?: string | Date;
 }
