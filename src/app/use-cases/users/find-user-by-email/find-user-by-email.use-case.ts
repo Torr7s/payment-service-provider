@@ -4,12 +4,13 @@ import { User } from '@prisma/client';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
+import { UserEntity } from '@/domain/entities/user.entity';
 
 export class FindUserByEmailUseCase implements IFindUserByEmailUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public async exec(email: string): Promise<User> {
-    const user: User = await this.userRepository.findByEmail(email);
+  public async exec(email: string): Promise<UserEntity> {
+    const user: UserEntity = await this.userRepository.findByEmail(email);
 
     if (!user) {
       throw new BadRequestException('Invalid email given', {

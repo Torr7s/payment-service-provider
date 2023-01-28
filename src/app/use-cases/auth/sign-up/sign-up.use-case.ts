@@ -1,10 +1,11 @@
 import { BadRequestException } from '@nestjs/common';
-import { User } from '@prisma/client';
 
 import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 import { SignUpDto } from '@/domain/dtos/authentication/sign-up.dto';
+
+import { UserEntity } from '@/domain/entities/user.entity';
 
 import { IAuthSignUpUseCase } from '@/domain/use-cases/auth';
 
@@ -16,8 +17,8 @@ export class AuthSignUpUseCase implements IAuthSignUpUseCase {
     private readonly userRepository: UserRepository
   ) {}
 
-  public async exec(signUpDto: SignUpDto): Promise<User> {
-    const userAlreadyExists: User = await this.userRepository.findByEmail(signUpDto.email);
+  public async exec(signUpDto: SignUpDto): Promise<UserEntity> {
+    const userAlreadyExists: UserEntity = await this.userRepository.findByEmail(signUpDto.email);
 
     if (userAlreadyExists) {
       throw new BadRequestException('Invalid registration', {
@@ -27,7 +28,7 @@ export class AuthSignUpUseCase implements IAuthSignUpUseCase {
 
     const hashedPassword: string = await hashString(signUpDto.password);
 
-    const user: User = await this.authRepository.signUp({
+    const user: UserEntity = await this.authRepository.signUp({
       email: signUpDto.email,
       fullName: signUpDto.fullName,
       password: hashedPassword
