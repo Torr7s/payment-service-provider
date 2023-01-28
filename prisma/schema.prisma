@@ -60,7 +60,7 @@ model Transaction {
   consumer           Consumer?     @relation(fields: [consumerId], references: [id])
   consumerId         String?
   
-  payables           Payable?
+  payable           Payable?
   
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @default(now()) @updatedAt
