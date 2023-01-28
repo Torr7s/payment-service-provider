@@ -1,7 +1,7 @@
 import { JwtPayload } from '@/core/@types';
-import { UserEntity } from '@/domain/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@prisma/client';
+
+import { UserEntity } from '@/domain/entities/user.entity';
 
 const jwtService = new JwtService({
   secret: process.env.JWT_SECRET_KEY,
