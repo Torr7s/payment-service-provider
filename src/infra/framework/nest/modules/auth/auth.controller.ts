@@ -27,8 +27,8 @@ export class AuthController {
   constructor(private readonly authSignUpUseCase: AuthSignUpUseCase) {}
 
   @Post('signin')
-  @UseGuards(LocalAuthGuard)
   @HttpCode(HttpStatus.OK)
+  @UseGuards(LocalAuthGuard)
   @UseInterceptors(TokenInterceptor)
   public async signIn(@AuthUser() user: User): Promise<User> {
     return user;
@@ -42,6 +42,7 @@ export class AuthController {
   }
 
   @Get('me')
+  @HttpCode(HttpStatus.OK)
   @UseGuards(SessionAuthGuard, JwtAuthGuard)
   public me(@AuthUser() user: User): User {
     return user;
