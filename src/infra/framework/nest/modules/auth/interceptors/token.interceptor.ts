@@ -1,15 +1,21 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
-import { User } from '@prisma/client';
 import { Response } from 'express';
+import { 
+  CallHandler, 
+  ExecutionContext, 
+  Injectable, 
+  NestInterceptor 
+} from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
 import { AuthUseCase } from '@/app/use-cases/auth/auth';
+
+import { UserEntity } from '@/domain/entities/user.entity';
 
 @Injectable()
 export class TokenInterceptor implements NestInterceptor {
   constructor(private readonly authUseCase: AuthUseCase) {}
 
-  public intercept(context: ExecutionContext, next: CallHandler<User>): Observable<User> {
+  public intercept(context: ExecutionContext, next: CallHandler<UserEntity>): Observable<UserEntity> {
     return next.handle().pipe(
       map(user => {
         const response: Response = context.switchToHttp().getResponse<Response>();
