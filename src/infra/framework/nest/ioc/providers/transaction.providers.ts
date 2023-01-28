@@ -1,6 +1,7 @@
 import { Provider } from '@nestjs/common';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
+
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
 import { ListTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
 

@@ -7,6 +7,7 @@ import { SessionSerializer } from '../../modules/auth/session.serializer';
 import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
+import { AuthUseCase } from '@/app/use-cases/auth/auth';
 import { AuthSignInUseCase } from '@/app/use-cases/auth/sign-in';
 import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
 import { FindUserByEmailUseCase } from '@/app/use-cases/users/find-user-by-email';
@@ -17,7 +18,6 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
 import { PrismaAuthRepository } from '@/infra/database/prisma/repositories/auth.repository';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.repository';
-import { AuthUseCase } from '@/app/use-cases/auth/auth';
 
 export const AuthModuleProviders: Provider[] = [
   PrismaService,
