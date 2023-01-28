@@ -3,6 +3,7 @@ import {
   IsDateString, 
   IsDecimal, 
   IsNotEmpty, 
+  IsOptional, 
   IsString, 
   IsUUID, 
   MaxLength,
@@ -43,5 +44,6 @@ export class CreateTransactionDto {
   cardCVV: string;
 
   @IsUUID()
-  consumerId: string;
+  @IsOptional()
+  consumerId?: string;
 }
