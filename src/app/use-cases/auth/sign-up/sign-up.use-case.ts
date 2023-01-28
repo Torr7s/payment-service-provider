@@ -1,4 +1,4 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { User } from '@prisma/client';
 
 import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
@@ -20,7 +20,7 @@ export class AuthSignUpUseCase implements IAuthSignUpUseCase {
     const userAlreadyExists: User = await this.userRepository.findByEmail(signUpDto.email);
 
     if (userAlreadyExists) {
-      throw new UnauthorizedException('Invalid registration', {
+      throw new BadRequestException('Invalid registration', {
         description: 'Email already taken'
       });
     }

@@ -1,4 +1,4 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { BadRequestException } from '@nestjs/common';
 import { User } from '@prisma/client';
 
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
@@ -15,13 +15,13 @@ export class AuthSignInUseCase implements IAuthSignInUseCase {
     const user: User = await this.userRepository.findByEmail(signInDto.email);
 
     if (!user) {
-      throw new UnauthorizedException(
+      throw new BadRequestException(
         'Invalid credentials'
       );
     }
 
     if (!(await compareStrings(signInDto.password, user.password))) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new BadRequestException('Invalid credentials');
     }
 
     delete user.password;
