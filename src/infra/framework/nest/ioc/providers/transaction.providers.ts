@@ -13,17 +13,20 @@ export const TransactionModuleProviders: Provider[] = [
   PrismaService,
   {
     provide: TransactionRepository,
-    useFactory: (prismaService: PrismaService): PrismaTransactionRepository => new PrismaTransactionRepository(prismaService),
+    useFactory: (prismaService: PrismaService): PrismaTransactionRepository => 
+      new PrismaTransactionRepository(prismaService),
     inject: [PrismaService]
   },
   {
     provide: CreateTransactionUseCase,
-    useFactory: (repository: TransactionRepository): CreateTransactionUseCase => new CreateTransactionUseCase(repository),
+    useFactory: (transactionRepository: TransactionRepository): CreateTransactionUseCase => 
+      new CreateTransactionUseCase(transactionRepository),
     inject: [TransactionRepository]
   },
   {
     provide: ListTransactionsUseCase,
-    useFactory: (repository: TransactionRepository): ListTransactionsUseCase => new ListTransactionsUseCase(repository),
+    useFactory: (transactionRepository: TransactionRepository): ListTransactionsUseCase => 
+      new ListTransactionsUseCase(transactionRepository),
     inject: [TransactionRepository]
   }
 ]

@@ -12,12 +12,14 @@ export const ConsumerModuleProviders: Provider[] = [
   PrismaService,
   {
     provide: ConsumerRepository,
-    useFactory: (prismaService: PrismaService): PrismaConsumerRepository => new PrismaConsumerRepository(prismaService),
+    useFactory: (prismaService: PrismaService): PrismaConsumerRepository => 
+      new PrismaConsumerRepository(prismaService),
     inject: [PrismaService]
   },
   {
     provide: FindConsumerByIdUseCase,
-    useFactory: (consumerRepository: ConsumerRepository): FindConsumerByIdUseCase => new FindConsumerByIdUseCase(consumerRepository),
+    useFactory: (consumerRepository: ConsumerRepository): FindConsumerByIdUseCase => 
+      new FindConsumerByIdUseCase(consumerRepository),
     inject: [ConsumerRepository]
   }
 ]

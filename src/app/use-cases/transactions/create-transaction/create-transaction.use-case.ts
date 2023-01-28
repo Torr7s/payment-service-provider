@@ -7,7 +7,7 @@ import { ICreateTransactionUseCase } from '@/domain/use-cases/transactions';
 import { CreateTransactionDto } from '@/domain/dtos/transaction';
 
 export class CreateTransactionUseCase implements ICreateTransactionUseCase {
-  constructor(private readonly repository: TransactionRepository) {}
+  constructor(private readonly transactionRepository: TransactionRepository) {}
 
   public async exec(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     const validPaymentMethods: string[] = ['CREDIT_CARD', 'DEBIT_CARD'];
@@ -18,7 +18,7 @@ export class CreateTransactionUseCase implements ICreateTransactionUseCase {
       });
     }
 
-    return this.repository.create({
+    return this.transactionRepository.create({
       ...createTransactionDto,
       cardNumber: createTransactionDto.cardNumber.slice(-4)
     });
