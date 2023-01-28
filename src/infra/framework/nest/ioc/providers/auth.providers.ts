@@ -10,9 +10,6 @@ import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { AuthUseCase } from '@/app/use-cases/auth/auth';
 import { AuthSignInUseCase } from '@/app/use-cases/auth/sign-in';
 import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
-import { FindUserByEmailUseCase } from '@/app/use-cases/users/find-user-by-email';
-
-import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
@@ -23,38 +20,36 @@ export const AuthModuleProviders: Provider[] = [
   PrismaService,
   {
     provide: AuthRepository,
-    useFactory: (prismaService: PrismaService): PrismaAuthRepository => new PrismaAuthRepository(prismaService),
+    useFactory: (prismaService: PrismaService): PrismaAuthRepository =>
+      new PrismaAuthRepository(prismaService),
     inject: [PrismaService]
   },
   {
     provide: UserRepository,
-    useFactory: (prismaService: PrismaService): PrismaUserRepository => new PrismaUserRepository(prismaService),
+    useFactory: (prismaService: PrismaService): PrismaUserRepository =>
+      new PrismaUserRepository(prismaService),
     inject: [PrismaService]
   },
   {
-    provide: FindUserByEmailUseCase,
-    useFactory: (userRepository: UserRepository): FindUserByEmailUseCase => new FindUserByEmailUseCase(userRepository),
+    provide: AuthUseCase,
+    useFactory: (userRepository: UserRepository): AuthUseCase => 
+      new AuthUseCase(userRepository),
     inject: [UserRepository]
   },
   {
     provide: AuthSignInUseCase,
-    useFactory: (userRepository: UserRepository): AuthSignInUseCase => new AuthSignInUseCase(userRepository),
+    useFactory: (userRepository: UserRepository): AuthSignInUseCase =>
+      new AuthSignInUseCase(userRepository),
     inject: [UserRepository]
   },
   {
     provide: AuthSignUpUseCase,
-    useFactory: (authRepository: AuthRepository, userRepository: UserRepository): AuthSignUpUseCase => {
-      return new AuthSignUpUseCase(
+    useFactory: (authRepository: AuthRepository, userRepository: UserRepository): AuthSignUpUseCase =>
+      new AuthSignUpUseCase(
         authRepository, 
         userRepository
-      );
-    },
+      ),
     inject: [AuthRepository, UserRepository]
-  },
-  {
-    provide: AuthUseCase,
-    useFactory: (findUserByEmailUseCase: IFindUserByEmailUseCase) => new AuthUseCase(findUserByEmailUseCase),
-    inject: [FindUserByEmailUseCase]
   },
   LocalStrategy, JwtStrategy, SessionSerializer
 ];
