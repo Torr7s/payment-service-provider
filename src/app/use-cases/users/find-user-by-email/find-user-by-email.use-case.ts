@@ -1,10 +1,10 @@
 import { BadRequestException } from '@nestjs/common';
-import { User } from '@prisma/client';
 
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
-import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
 import { UserEntity } from '@/domain/entities/user.entity';
+
+import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
 
 export class FindUserByEmailUseCase implements IFindUserByEmailUseCase {
   constructor(private readonly userRepository: UserRepository) {}

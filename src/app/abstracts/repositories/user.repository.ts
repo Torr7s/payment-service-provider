@@ -1,7 +1,6 @@
-import { User } from '@prisma/client';
+import { UserEntity } from '@/domain/entities/user.entity';
 
 import { IUserRepository } from '@/domain/repositories/user.repository';
-import { UserEntity } from '@/domain/entities/user.entity';
 
 export abstract class UserRepository implements IUserRepository {
   public abstract findByEmail: (email: string) => Promise<UserEntity>;
