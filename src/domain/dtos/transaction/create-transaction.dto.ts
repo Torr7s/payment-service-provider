@@ -3,9 +3,7 @@ import {
   IsDateString, 
   IsDecimal, 
   IsNotEmpty, 
-  IsOptional, 
   IsString, 
-  IsUUID, 
   MaxLength,
   MinLength 
 } from 'class-validator';
@@ -42,8 +40,4 @@ export class CreateTransactionDto {
   @MaxLength(3)
   @IsNotEmpty()
   cardCVV: string;
-
-  @IsUUID()
-  @IsOptional()
-  consumerId?: string;
 }
