@@ -4,14 +4,18 @@ import { PrismaService } from '../prisma.service';
 
 import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
 
-import { SignUpDto } from '@/domain/dtos/authentication/sign-up.dto';
+import { UserEntity } from '@/domain/entities/user.entity';
 
 export class PrismaAuthRepository implements AuthRepository {
   constructor(private prismaService: PrismaService) {}
 
-  public async signUp(signUpDto: SignUpDto): Promise<User> {
+  public async signUp(data: UserEntity): Promise<UserEntity> {
     const user: User = await this.prismaService.user.create({
-      data: signUpDto,
+      data: {
+        email: data.email,
+        fullName: data.fullName,
+        password: data.password
+      }
     });
 
     await this.prismaService.consumer.create({
