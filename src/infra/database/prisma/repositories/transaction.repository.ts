@@ -9,9 +9,12 @@ import { CreateTransactionDto } from '@/domain/dtos/transaction';
 export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private prismaService: PrismaService) {}
 
-  public async create(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
+  public async create(consumerId: string, createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     return this.prismaService.transaction.create({
-      data: createTransactionDto
+      data: {
+        ...createTransactionDto,
+        consumerId
+      }
     });
   }
 

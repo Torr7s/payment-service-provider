@@ -9,7 +9,7 @@ import { CreateTransactionDto } from '@/domain/dtos/transaction';
 export class CreateTransactionUseCase implements ICreateTransactionUseCase {
   constructor(private readonly transactionRepository: TransactionRepository) {}
 
-  public async exec(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
+  public async exec(consumerId: string, createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     const validPaymentMethods: string[] = ['CREDIT_CARD', 'DEBIT_CARD'];
 
     if (!validPaymentMethods.includes(createTransactionDto.paymentMethod)) {
@@ -18,7 +18,7 @@ export class CreateTransactionUseCase implements ICreateTransactionUseCase {
       });
     }
 
-    return this.transactionRepository.create({
+    return this.transactionRepository.create(consumerId, {
       ...createTransactionDto,
       cardNumber: createTransactionDto.cardNumber.slice(-4)
     });
