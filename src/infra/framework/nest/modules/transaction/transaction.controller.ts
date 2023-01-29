@@ -35,10 +35,10 @@ export class TransactionController {
     @AuthUser() user: UserEntity,
     @Body() createTransactionDto: CreateTransactionDto
   ): Promise<Transaction> {
-    return this.createTransactionUseCase.exec(
-      user.consumerProfile.id,
-      createTransactionDto
-    );
+    return this.createTransactionUseCase.exec({
+      ...createTransactionDto,
+      consumerId: user.consumerProfile.id
+    });
   }
 
   @Get()
