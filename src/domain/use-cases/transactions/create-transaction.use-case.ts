@@ -1,4 +1,6 @@
-import { PaymentMethod, Prisma, Transaction } from '@prisma/client';
+import { PaymentMethod, Prisma } from '@prisma/client';
+
+import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 export interface ICreateTransactionRequest {
   value: string | Prisma.Decimal;
@@ -12,5 +14,5 @@ export interface ICreateTransactionRequest {
 }
 
 export interface ICreateTransactionUseCase {
-  exec: (input: ICreateTransactionRequest) => Promise<Transaction>;
+  exec: (input: ICreateTransactionRequest) => Promise<TransactionEntity>;
 }

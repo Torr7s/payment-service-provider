@@ -4,18 +4,13 @@ import { PrismaService } from '../prisma.service';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 
-import { CreateTransactionDto } from '@/domain/dtos/transaction';
+import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private prismaService: PrismaService) {}
 
-  public async create(consumerId: string, createTransactionDto: CreateTransactionDto): Promise<Transaction> {
-    return this.prismaService.transaction.create({
-      data: {
-        ...createTransactionDto,
-        consumerId
-      }
-    });
+  public async create(data: TransactionEntity): Promise<Transaction> {
+    return this.prismaService.transaction.create({ data });
   }
 
   public async findById(id: string): Promise<Transaction> {

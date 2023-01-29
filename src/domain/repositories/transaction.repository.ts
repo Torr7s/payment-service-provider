@@ -1,9 +1,7 @@
-import { Transaction } from '@prisma/client';
-
-import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
+import { TransactionEntity } from '../entities/transaction.entity';
 
 export interface ITransactionRepository {
-  create: (consumerId: string, createTransactionDto: CreateTransactionDto) => Promise<Transaction>;
-  findById: (id: string) => Promise<Transaction>;
-  listConsumerTransactions: (consumerId: string) => Promise<Transaction[]>;
+  create: (data: TransactionEntity) => Promise<TransactionEntity>;
+  findById: (id: string) => Promise<TransactionEntity>;
+  listConsumerTransactions: (consumerId: string) => Promise<Array<TransactionEntity>>;
 }

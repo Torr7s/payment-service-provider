@@ -1,5 +1,5 @@
-import { Transaction } from '@prisma/client';
+import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 export interface IListConsumerTransactionsUseCase {
-  exec: (consumerId: string) => Promise<Transaction[]>;
+  exec: (consumerId: string) => Promise<Array<TransactionEntity>>;
 }
