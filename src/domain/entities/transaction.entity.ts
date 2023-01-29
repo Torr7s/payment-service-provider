@@ -1,20 +1,16 @@
 import { PaymentMethod, Prisma } from '@prisma/client';
-import { DecimalJsLike } from '@prisma/client/runtime';
-
-import { ConsumerEntity } from './consumer.entity';
-import { PayableEntity } from './payable.entity';
 
 export class TransactionEntity {
   id?: string;
-  value: string | number | Prisma.Decimal | DecimalJsLike;
+  value: string | number | Prisma.Decimal;
   description: string;
   paymentMethod: PaymentMethod;
   cardNumber: string;
   cardOwnerName: string;
   cardExpirationDate: string | Date;
   cardCVV: string;
-  consumer: ConsumerEntity;
-  payable: PayableEntity;
+  consumer?: Prisma.ConsumerCreateNestedOneWithoutTransactionsInput;
+  payable?: Prisma.PayableCreateNestedOneWithoutTransactionInput;
   createdAt?: string | Date;
   updatedAt?: string | Date;
 }
