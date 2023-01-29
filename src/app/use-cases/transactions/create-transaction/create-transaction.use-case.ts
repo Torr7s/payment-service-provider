@@ -12,7 +12,7 @@ export class CreateTransactionUseCase implements ICreateTransactionUseCase {
   public async exec(consumerId: string, createTransactionDto: CreateTransactionDto): Promise<Transaction> {
     const validPaymentMethods: string[] = ['credit_card', 'debit_card'];
 
-    if (!validPaymentMethods.includes(createTransactionDto.paymentMethod.toLowerCase())) {
+    if (!validPaymentMethods.includes(createTransactionDto.paymentMethod)) {
       throw new BadRequestException('Invalid transaction', {
         description: `A valid payment method wasn't given, acceptable methods: ${validPaymentMethods.join(', ')}`
       });
