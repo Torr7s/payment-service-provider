@@ -1,11 +1,11 @@
 import { PayableStatus, Prisma } from '@prisma/client';
 import { DecimalJsLike } from '@prisma/client/runtime';
 
+import { BaseEntity } from './base.entity';
 import { ConsumerEntity } from './consumer.entity';
 import { TransactionEntity } from './transaction.entity';
 
-export class PayableEntity {
-  id?: string;
+export class PayableEntity extends BaseEntity {
   status: PayableStatus;
   paymentDate: string | Date;
   fee: string | number | Prisma.Decimal | DecimalJsLike;
@@ -13,6 +13,4 @@ export class PayableEntity {
   consumerId: string;
   transaction?: TransactionEntity;
   transactionId: string;
-  createdAt?: string | Date;
-  updatedAt?: string | Date;
 }

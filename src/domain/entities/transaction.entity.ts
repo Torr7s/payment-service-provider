@@ -1,7 +1,8 @@
 import { PaymentMethod, Prisma } from '@prisma/client';
 
-export class TransactionEntity {
-  id?: string;
+import { BaseEntity } from './base.entity';
+
+export class TransactionEntity extends BaseEntity {
   value: string | number | Prisma.Decimal;
   description: string;
   paymentMethod: PaymentMethod;
@@ -11,6 +12,4 @@ export class TransactionEntity {
   cardCVV: string;
   consumer?: Prisma.ConsumerCreateNestedOneWithoutTransactionsInput;
   payable?: Prisma.PayableCreateNestedOneWithoutTransactionInput;
-  createdAt?: string | Date;
-  updatedAt?: string | Date;
 }
