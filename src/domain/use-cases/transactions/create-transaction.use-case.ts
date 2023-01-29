@@ -1,7 +1,16 @@
-import { Transaction } from '@prisma/client';
+import { PaymentMethod, Prisma, Transaction } from '@prisma/client';
 
-import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
+export interface ICreateTransactionRequest {
+  value: string | Prisma.Decimal;
+  description: string;
+  paymentMethod: PaymentMethod;
+  cardNumber: string;
+  cardOwnerName: string;
+  cardExpirationDate: string | Date;
+  cardCVV: string;
+  consumerId: string;
+}
 
 export interface ICreateTransactionUseCase {
-  exec: (consumerId: string, createTransactionDto: CreateTransactionDto) => Promise<Transaction>;
+  exec: (input: ICreateTransactionRequest) => Promise<Transaction>;
 }
