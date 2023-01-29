@@ -1,5 +1,3 @@
-import { Transaction } from '@prisma/client';
-
 import { PrismaService } from '../prisma.service';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
@@ -9,7 +7,7 @@ import { TransactionEntity } from '@/domain/entities/transaction.entity';
 export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private prismaService: PrismaService) {}
 
-  public async create(data: TransactionEntity): Promise<Transaction> {
+  public async create(data: TransactionEntity): Promise<TransactionEntity> {
     return this.prismaService.transaction.create({
       data: {
         cardCVV: data.cardCVV,
@@ -24,7 +22,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
     });
   }
 
-  public async findById(id: string): Promise<Transaction> {
+  public async findById(id: string): Promise<TransactionEntity> {
     return this.prismaService.transaction.findUnique({
       where: {
         id
@@ -32,7 +30,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
     });
   }
 
-  public async listConsumerTransactions(consumerId: string): Promise<Transaction[]> {
+  public async listConsumerTransactions(consumerId: string): Promise<Array<TransactionEntity>> {
     return await this.prismaService.transaction.findMany({
       where: {
         consumerId
