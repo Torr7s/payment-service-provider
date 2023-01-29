@@ -38,7 +38,7 @@ export class TransactionController {
     return this.createTransactionUseCase.exec({
       ...createTransactionDto,
       consumerId: user.consumerProfile.id
-    })
+    });
   }
 
   @Get()
