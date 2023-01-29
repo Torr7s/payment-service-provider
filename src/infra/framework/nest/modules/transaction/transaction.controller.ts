@@ -1,4 +1,3 @@
-import { Transaction } from '@prisma/client';
 import {
   Body,
   Controller,
@@ -20,6 +19,7 @@ import { ListTransactionsUseCase } from '@/app/use-cases/transactions/list-trans
 import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
 
 import { UserEntity } from '@/domain/entities/user.entity';
+import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 @Controller('transactions')
 @UseGuards(SessionAuthGuard, JwtAuthGuard)
@@ -34,16 +34,16 @@ export class TransactionController {
   public async create(
     @AuthUser() user: UserEntity,
     @Body() createTransactionDto: CreateTransactionDto
-  ): Promise<Transaction> {
+  ): Promise<TransactionEntity> {
     return this.createTransactionUseCase.exec({
       ...createTransactionDto,
       consumerId: user.consumerProfile.id
-    });
+    })
   }
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async list(@AuthUser() user: UserEntity): Promise<Transaction[]> {
+  public async list(@AuthUser() user: UserEntity): Promise<Array<TransactionEntity>> {
     return this.listTransactionsUseCase.exec(user.consumerProfile.id);
   }
 }
