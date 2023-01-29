@@ -10,7 +10,18 @@ export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private prismaService: PrismaService) {}
 
   public async create(data: TransactionEntity): Promise<Transaction> {
-    return this.prismaService.transaction.create({ data });
+    return this.prismaService.transaction.create({
+      data: {
+        cardCVV: data.cardCVV,
+        cardExpirationDate: data.cardExpirationDate,
+        cardNumber: data.cardNumber,
+        cardOwnerName: data.cardOwnerName,
+        description: data.description,
+        paymentMethod: data.paymentMethod,
+        value: data.value,
+        consumerId: data.consumerId
+      }
+    });
   }
 
   public async findById(id: string): Promise<Transaction> {
