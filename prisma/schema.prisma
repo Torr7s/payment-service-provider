@@ -15,13 +15,13 @@ datasource db {
 }
 
 enum PaymentMethod {
-  DEBIT_CARD
-  CREDIT_CARD
+  debit_card
+  credit_card
 }
 
 enum PayableStatus {
-  PAID
-  WAITING_FUNDS
+  paid
+  waiting_funds
 }
 
 model User {
