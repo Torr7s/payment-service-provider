@@ -7,6 +7,18 @@ import { PayableRepository } from '@/app/abstracts/repositories/payable.reposito
 import { PayableEntity } from '@/domain/entities/payable.entity';
 
 export class PrismaPayableRepository implements PayableRepository {
+  private readonly _include = {
+    transaction: {
+      select: {
+        id: true,
+        value: true,
+        description: true,
+        createdAt: true,
+        updatedAt: true
+      }
+    }
+  }
+
   constructor(private prismaService: PrismaService) {}
 
   public async create(data: PayableEntity): Promise<PayableEntity> {
@@ -26,7 +38,8 @@ export class PrismaPayableRepository implements PayableRepository {
       where: {
         consumerId,
         status: payableStatus
-      }
+      },
+      include: this._include
     });
   }
 }
