@@ -22,8 +22,6 @@ export class PrismaPayableRepository implements PayableRepository {
   }
 
   public async listPayables(consumerId: string, payableStatus: PayableStatus) {
-    console.log({ arguments });
-
     return this.prismaService.payable.findMany({
       where: {
         consumerId,
