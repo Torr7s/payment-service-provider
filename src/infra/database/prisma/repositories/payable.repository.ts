@@ -1,3 +1,5 @@
+import { PayableStatus } from '@prisma/client';
+
 import { PrismaService } from '../prisma.service';
 
 import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
@@ -15,6 +17,17 @@ export class PrismaPayableRepository implements PayableRepository {
         paymentDate: data.paymentDate,
         fee: data.fee,
         status: data.status
+      }
+    });
+  }
+
+  public async listPayables(consumerId: string, payableStatus: PayableStatus) {
+    console.log({ arguments });
+
+    return this.prismaService.payable.findMany({
+      where: {
+        consumerId,
+        status: payableStatus
       }
     });
   }
