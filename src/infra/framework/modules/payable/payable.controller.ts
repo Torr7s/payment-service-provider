@@ -25,7 +25,7 @@ export class PayableController {
 
   @Get(':status')
   @HttpCode(HttpStatus.OK)
-  public async listAvailablePayables(
+  public async list(
     @AuthUser() user: UserEntity,
     @Param('status') status: PayableStatus
   ): Promise<Array<PayableEntity>> {
