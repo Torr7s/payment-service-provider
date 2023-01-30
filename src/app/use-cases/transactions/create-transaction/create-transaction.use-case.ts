@@ -24,7 +24,11 @@ export class CreateTransactionUseCase implements ICreateTransactionUseCase {
       );
     }
 
-    const transaction: TransactionEntity = await this.transactionRepository.create(input);
+    const transaction: TransactionEntity = await this.transactionRepository.create({
+      ...input,
+      cardNumber: input.cardNumber.slice(-4)
+    });
+    
     const payable: PayableEntity = await this.createPayableUseCase.exec(transaction.id);
 
     return {
