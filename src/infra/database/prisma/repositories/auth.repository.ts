@@ -10,13 +10,7 @@ export class PrismaAuthRepository implements AuthRepository {
   constructor(private prismaService: PrismaService) {}
 
   public async signUp(data: UserEntity): Promise<UserEntity> {
-    const user: User = await this.prismaService.user.create({
-      data: {
-        email: data.email,
-        fullName: data.fullName,
-        password: data.password
-      }
-    });
+    const user: User = await this.prismaService.user.create({ data });
 
     return user;
   }

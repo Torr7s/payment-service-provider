@@ -22,15 +22,7 @@ export class PrismaPayableRepository implements PayableRepository {
   constructor(private prismaService: PrismaService) {}
 
   public async create(data: PayableEntity): Promise<PayableEntity> {
-    return this.prismaService.payable.create({
-      data: {
-        userId: data.userId,
-        transactionId: data.transactionId,
-        paymentDate: data.paymentDate,
-        fee: data.fee,
-        status: data.status
-      }
-    });
+    return this.prismaService.payable.create({ data });
   }
 
   public async listUserPayables(userId: string, payableStatus: PayableStatus) {
