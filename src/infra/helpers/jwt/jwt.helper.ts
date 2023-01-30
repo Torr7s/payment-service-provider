@@ -1,5 +1,6 @@
-import { JwtPayload } from '@/core/@types';
 import { JwtService } from '@nestjs/jwt';
+
+import { JwtPayload } from '@/@types';
 
 import { UserEntity } from '@/domain/entities/user.entity';
 

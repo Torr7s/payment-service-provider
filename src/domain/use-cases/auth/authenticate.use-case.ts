@@ -1,4 +1,4 @@
-import { JwtPayload } from '@/core/@types';
+import { JwtPayload } from '@/@types';
 
 import { UserEntity } from '@/domain/entities/user.entity';
 

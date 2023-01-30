@@ -1,8 +1,8 @@
 import { UnauthorizedException } from '@nestjs/common';
 
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
+import { JwtPayload } from '@/@types';
 
-import { JwtPayload } from '@/core/@types';
+import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 import { IAuthUseCase } from '@/domain/use-cases/auth';
 import { UserEntity } from '@/domain/entities/user.entity';
