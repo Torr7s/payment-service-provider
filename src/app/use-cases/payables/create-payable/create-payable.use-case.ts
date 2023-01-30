@@ -31,7 +31,7 @@ export class CreatePayableUseCase implements ICreatePayableUseCase {
     const commonProps = {
       fee: calculateFee(transaction),
       transactionId: transaction.id,
-      consumerId: transaction.consumerId
+      userId: transaction.userId
     }
 
     if (transaction.paymentMethod === PaymentMethod.credit_card) {

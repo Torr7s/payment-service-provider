@@ -1,5 +1,5 @@
 import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
-export interface IListConsumerTransactionsUseCase {
-  exec: (consumerId: string) => Promise<Array<TransactionEntity>>;
+export interface IListUserTransactionsUseCase {
+  exec: (userId: string) => Promise<Array<TransactionEntity>>;
 }

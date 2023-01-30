@@ -37,13 +37,13 @@ export class TransactionController {
   ): Promise<TransactionEntity> {
     return this.createTransactionUseCase.exec({
       ...createTransactionDto,
-      consumerId: user.consumerProfile.id
+      userId: user.id
     });
   }
 
   @Get()
   @HttpCode(HttpStatus.OK)
   public async list(@AuthUser() user: UserEntity): Promise<Array<TransactionEntity>> {
-    return this.listTransactionsUseCase.exec(user.consumerProfile.id);
+    return this.listTransactionsUseCase.exec(user.id);
   }
 }

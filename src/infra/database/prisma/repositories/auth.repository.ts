@@ -18,16 +18,6 @@ export class PrismaAuthRepository implements AuthRepository {
       }
     });
 
-    await this.prismaService.consumer.create({
-      data: {
-        userProfile: {
-          connect: {
-            id: user.id
-          }
-        }
-      }
-    });
-
     return user;
   }
 } 

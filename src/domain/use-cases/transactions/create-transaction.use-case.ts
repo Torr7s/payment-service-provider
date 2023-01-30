@@ -10,7 +10,7 @@ export interface ICreateTransactionRequest {
   cardOwnerName: string;
   cardExpirationDate: string | Date;
   cardCVV: string;
-  consumerId: string;
+  userId: string;
 }
 
 export interface ICreateTransactionUseCase {

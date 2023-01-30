@@ -7,6 +7,6 @@ export class PayableEntity extends BaseEntity {
   status: PayableStatus;
   paymentDate: string | Date;
   fee: string | number | Prisma.Decimal | DecimalJsLike;
-  consumerId: string;
+  userId: string;
   transactionId: string;
 }

@@ -24,7 +24,7 @@ export class PrismaPayableRepository implements PayableRepository {
   public async create(data: PayableEntity): Promise<PayableEntity> {
     return this.prismaService.payable.create({
       data: {
-        consumerId: data.consumerId,
+        userId: data.userId,
         transactionId: data.transactionId,
         paymentDate: data.paymentDate,
         fee: data.fee,
@@ -33,10 +33,10 @@ export class PrismaPayableRepository implements PayableRepository {
     });
   }
 
-  public async listPayables(consumerId: string, payableStatus: PayableStatus) {
+  public async listUserPayables(userId: string, payableStatus: PayableStatus) {
     return this.prismaService.payable.findMany({
       where: {
-        consumerId,
+        userId,
         status: payableStatus
       },
       include: this._include

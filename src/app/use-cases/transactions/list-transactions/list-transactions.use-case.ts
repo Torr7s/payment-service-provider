@@ -2,12 +2,12 @@ import { TransactionRepository } from '@/app/abstracts/repositories/transaction.
 
 import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
-import { IListConsumerTransactionsUseCase } from '@/domain/use-cases/transactions';
+import { IListUserTransactionsUseCase } from '@/domain/use-cases/transactions';
 
-export class ListTransactionsUseCase implements IListConsumerTransactionsUseCase {
+export class ListTransactionsUseCase implements IListUserTransactionsUseCase {
   constructor(private readonly repository: TransactionRepository) {}
 
-  public async exec(consumerId: string): Promise<TransactionEntity[]> {
-    return this.repository.listConsumerTransactions(consumerId);
+  public async exec(userId: string): Promise<TransactionEntity[]> {
+    return this.repository.listUserTransactions(userId);
   }
 }

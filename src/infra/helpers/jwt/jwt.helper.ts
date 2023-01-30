@@ -21,7 +21,7 @@ export const signToken = (user: UserEntity): string => {
   const payload: JwtPayload = {
     sub: user.id,
     email: user.email,
-    consumerId: user.consumerProfile.id
+    consumerId: user.id
   }
 
   return jwtService.sign(payload);

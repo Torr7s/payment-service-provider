@@ -5,5 +5,5 @@ import { ITransactionRepository } from '@/domain/repositories/transaction.reposi
 export abstract class TransactionRepository implements ITransactionRepository {
   public abstract create: (data: TransactionEntity) => Promise<TransactionEntity>;
   public abstract findById: (id: string) => Promise<TransactionEntity>;
-  public abstract listConsumerTransactions: (consumerId: string) => Promise<Array<TransactionEntity>>;
+  public abstract listUserTransactions: (userId: string) => Promise<Array<TransactionEntity>>;
 }

@@ -10,7 +10,7 @@ import { IListPayablesUseCase } from '@/domain/use-cases/payable/list-payables.u
 export class ListPayablesUseCase implements IListPayablesUseCase {
   constructor(private readonly payableRepository: PayableRepository) {}
 
-  public async exec(consumerId: string, payableStatus: PayableStatus): Promise<Array<PayableEntity>> {
+  public async exec(userId: string, payableStatus: PayableStatus): Promise<Array<PayableEntity>> {
     const status = {
       available: PayableStatus.paid,
       waiting_funds: PayableStatus.waiting_funds
@@ -24,6 +24,6 @@ export class ListPayablesUseCase implements IListPayablesUseCase {
       );
     }
 
-    return this.payableRepository.listPayables(consumerId, chosenStatus);
+    return this.payableRepository.listUserPayables(userId, chosenStatus);
   }
 }

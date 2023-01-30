@@ -29,6 +29,6 @@ export class PayableController {
     @AuthUser() user: UserEntity,
     @Param('status') status: PayableStatus
   ): Promise<Array<PayableEntity>> {
-    return this.listPayablesUseCase.exec(user.consumerProfile.id, status);
+    return this.listPayablesUseCase.exec(user.id, status);
   }
 }

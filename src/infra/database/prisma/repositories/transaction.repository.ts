@@ -17,7 +17,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
         description: data.description,
         paymentMethod: data.paymentMethod,
         value: data.value,
-        consumerId: data.consumerId
+        userId: data.userId
       }
     });
   }
@@ -30,10 +30,10 @@ export class PrismaTransactionRepository implements TransactionRepository {
     });
   }
 
-  public async listConsumerTransactions(consumerId: string): Promise<Array<TransactionEntity>> {
+  public async listUserTransactions(userId: string): Promise<Array<TransactionEntity>> {
     return await this.prismaService.transaction.findMany({
       where: {
-        consumerId
+        userId
       }
     });
   }

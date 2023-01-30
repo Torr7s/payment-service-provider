@@ -11,6 +11,6 @@ export class TransactionEntity extends BaseEntity {
   cardOwnerName: string;
   cardExpirationDate: string | Date;
   cardCVV: string;
-  consumerId?: string;
+  userId?: string;
   payable?: PayableEntity;
 }
