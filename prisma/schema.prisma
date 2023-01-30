@@ -30,27 +30,13 @@ model User {
   email           String    @unique
   password        String
 
-  consumerProfile Consumer?
+  transactions    Transaction[]
+  payables        Payable[]
   
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now()) @updatedAt
   
   @@map("users")
-}
-
-model Consumer {
-  id           String        @id @default(uuid())
-
-  userProfile  User          @relation(fields: [userId], references: [id])
-  userId       String        @unique
-
-  transactions Transaction[]
-  payables     Payable[]
-  
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @default(now()) @updatedAt
-
-  @@map("consumers")
 }
 
 model Transaction {
@@ -63,10 +49,10 @@ model Transaction {
   cardExpirationDate DateTime
   cardCVV            String
 
-  consumer           Consumer?     @relation(fields: [consumerId], references: [id])
-  consumerId         String?
+  user               User?     @relation(fields: [userId], references: [id])
+  userId             String?
   
-  payable           Payable?
+  payable            Payable?
   
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @default(now()) @updatedAt
@@ -79,10 +65,13 @@ model Payable {
   status        PayableStatus?
   paymentDate   DateTime?      @db.Date
   fee           Decimal?       @db.Decimal(9, 2)
-  consumer      Consumer?      @relation(fields: [consumerId], references: [id])
-  consumerId    String
+
+  user          User?          @relation(fields: [userId], references: [id])
+  userId        String
+  
   transaction   Transaction?   @relation(fields: [transactionId], references: [id])
   transactionId String         @unique
+  
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @default(now()) @updatedAt
 
