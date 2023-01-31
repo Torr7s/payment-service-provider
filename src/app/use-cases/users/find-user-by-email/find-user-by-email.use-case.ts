@@ -1,7 +1,7 @@
-import { BadRequestException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-
+import { UserException } from '@/app/exceptions/user.exception';
 import { UserEntity } from '@/domain/entities/user.entity';
 
 import { IFindUserByEmailUseCase } from '@/domain/use-cases/users';
@@ -13,9 +13,10 @@ export class FindUserByEmailUseCase implements IFindUserByEmailUseCase {
     const user: UserEntity = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new BadRequestException('Invalid email given', {
-        description: 'No user were found with the given e-mail address'
-      });
+      throw new UserException(
+        'No user were found with the given email',
+        HttpStatus.BAD_REQUEST
+      );
     }
 
     delete user.password;

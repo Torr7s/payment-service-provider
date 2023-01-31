@@ -1,11 +1,12 @@
-import { BadRequestException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { CreatePayableUseCase } from '../../payables/create-payable';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
+import { TransactionException } from '@/app/exceptions/transaction.exception';
+import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 import { PayableEntity } from '@/domain/entities/payable.entity';
-import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 import { ICreateTransactionRequest, ICreateTransactionUseCase } from '@/domain/use-cases/transactions';
 
@@ -19,8 +20,9 @@ export class CreateTransactionUseCase implements ICreateTransactionUseCase {
     const validPaymentMethods: string[] = ['credit_card', 'debit_card'];
 
     if (!validPaymentMethods.includes(input.paymentMethod)) {
-      throw new BadRequestException(
-        `Invalid payment method! Acceptable options: credit_card, debit_card`
+      throw new TransactionException(
+        'Invalid payment method provided! Acceptable options: credit_card, debit_card',
+        HttpStatus.BAD_REQUEST
       );
     }
 
@@ -29,7 +31,7 @@ export class CreateTransactionUseCase implements ICreateTransactionUseCase {
       cardNumber: input.cardNumber.slice(-4)
     });
     
-    const payable: PayableEntity = await this.createPayableUseCase.exec(transaction.id);
+    const payable: PayableEntity = await this.createPayableUseCase.exec(transaction);
 
     return {
       ...transaction,

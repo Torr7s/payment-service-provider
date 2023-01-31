@@ -1,5 +1,4 @@
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
-
 import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 import { IListUserTransactionsUseCase } from '@/domain/use-cases/transactions';

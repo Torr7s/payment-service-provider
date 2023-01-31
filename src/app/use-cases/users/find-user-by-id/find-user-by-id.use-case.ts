@@ -1,7 +1,7 @@
-import { BadRequestException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-
+import { UserException } from '@/app/exceptions/user.exception';
 import { UserEntity } from '@/domain/entities/user.entity';
 
 import { IFindUserByIdUseCase } from '@/domain/use-cases/users/find-user-by-id.use-case';
@@ -13,9 +13,10 @@ export class FindUserByIdUseCase implements IFindUserByIdUseCase {
     const user: UserEntity = await this.userRepository.findById(id);
 
     if (!user) {
-      throw new BadRequestException('Invalid user', {
-        description: 'No user were found with the given ID'
-      });
+      throw new UserException(
+        'No user were found with the given ID',
+        HttpStatus.BAD_REQUEST
+      );
     }
 
     delete user.password;

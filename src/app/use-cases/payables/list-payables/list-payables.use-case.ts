@@ -1,8 +1,8 @@
-import { BadRequestException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 import { PayableStatus } from '@prisma/client';
 
 import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
-
+import { PayableException } from '@/app/exceptions/payable.exception';
 import { PayableEntity } from '@/domain/entities/payable.entity';
 
 import { IListPayablesUseCase } from '@/domain/use-cases/payable/list-payables.use-case';
@@ -15,15 +15,16 @@ export class ListPayablesUseCase implements IListPayablesUseCase {
       available: PayableStatus.paid,
       waiting_funds: PayableStatus.waiting_funds
     }
-    
-    const chosenStatus: PayableStatus = status[payableStatus];
 
-    if (!chosenStatus) {
-      throw new BadRequestException(
-        `Invalid status provided! Acceptable options: available, waiting_funds`
+    const statusMatched: PayableStatus = status[payableStatus];
+
+    if (!statusMatched) {
+      throw new PayableException(
+        'Invalid payable status provided! Acceptable options: available, waiting_funds',
+        HttpStatus.BAD_REQUEST
       );
     }
 
-    return this.payableRepository.listUserPayables(userId, chosenStatus);
+    return this.payableRepository.listUserPayables(userId, statusMatched);
   }
 }
