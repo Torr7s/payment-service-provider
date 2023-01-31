@@ -1,10 +1,11 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { JwtPayload } from '@/@types';
 
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-
+import { AuthException } from '@/app/exceptions/auth.exception';
 import { IAuthUseCase } from '@/domain/use-cases/auth';
+
+import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { UserEntity } from '@/domain/entities/user.entity';
 
 import { signToken as signTokenHelper } from '@/infra/helpers/jwt';
@@ -20,8 +21,9 @@ export class AuthUseCase implements IAuthUseCase {
     const user: UserEntity = await this.userRepository.findByEmail(payload.email);
 
     if (!user) {
-      throw new UnauthorizedException(
-        'Invalid credentials'
+      throw new AuthException(
+        'Invalid credentials', 
+        HttpStatus.UNAUTHORIZED
       );
     }
 

@@ -1,11 +1,12 @@
-import { BadRequestException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
 
 import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-
-import { UserEntity } from '@/domain/entities/user.entity';
+import { AuthException } from '@/app/exceptions/auth.exception';
 
 import { IAuthSignUpUseCase, IAuthSignUpRequest } from '@/domain/use-cases/auth';
+
+import { UserRepository } from '@/app/abstracts/repositories/user.repository';
+import { UserEntity } from '@/domain/entities/user.entity';
 
 import { hashString } from '@/infra/helpers/bcrypt';
 
@@ -19,17 +20,15 @@ export class AuthSignUpUseCase implements IAuthSignUpUseCase {
     const userAlreadyExists: UserEntity = await this.userRepository.findByEmail(input.email);
 
     if (userAlreadyExists) {
-      throw new BadRequestException('Invalid registration', {
-        description: 'Email already taken'
-      });
+      throw new AuthException(
+        'E-mail address already taken',
+        HttpStatus.BAD_REQUEST
+      );
     }
 
-    const hashedPassword: string = await hashString(input.password);
-
     const user: UserEntity = await this.authRepository.signUp({
-      email: input.email,
-      fullName: input.fullName,
-      password: hashedPassword
+      ...input,
+      password: await hashString(input.password)
     });
 
     delete user.password;
