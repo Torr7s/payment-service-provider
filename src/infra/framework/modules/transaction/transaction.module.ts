@@ -48,11 +48,8 @@ import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.
     },
     {
       provide: CreatePayableUseCase,
-      useFactory: (payableRepository: PayableRepository, transactionRepository: TransactionRepository): CreatePayableUseCase =>
-        new CreatePayableUseCase(
-          payableRepository,
-          transactionRepository
-        ),
+      useFactory: (payableRepository: PayableRepository): CreatePayableUseCase =>
+        new CreatePayableUseCase(payableRepository),
       inject: [PayableRepository, TransactionRepository]
     },
     {

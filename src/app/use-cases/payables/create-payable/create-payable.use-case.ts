@@ -1,31 +1,18 @@
-import { BadRequestException } from '@nestjs/common';
 import { PayableStatus, PaymentMethod } from '@prisma/client';
 
-import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
-import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
-
-import { PayableEntity } from '@/domain/entities/payable.entity';
 import { TransactionEntity } from '@/domain/entities/transaction.entity';
+
+import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
+import { PayableEntity } from '@/domain/entities/payable.entity';
 
 import { ICreatePayableUseCase } from '@/domain/use-cases/payable';
 
 import { calculateFee } from '@/infra/helpers/payable';
 
 export class CreatePayableUseCase implements ICreatePayableUseCase {
-  constructor(
-    private readonly payableRepository: PayableRepository,
-    private readonly transactionRepository: TransactionRepository
-  ) {}
+  constructor(private readonly payableRepository: PayableRepository) {}
 
-  public async exec(transactionId: string): Promise<PayableEntity> {
-    const transaction: TransactionEntity = await this.transactionRepository.findById(transactionId);
-
-    if (!transaction) {
-      throw new BadRequestException(
-        `Invalid transaction provided`
-      );
-    }
-
+  public async exec(transaction: TransactionEntity): Promise<PayableEntity> {
     let payable: PayableEntity;
 
     const commonProps = {
