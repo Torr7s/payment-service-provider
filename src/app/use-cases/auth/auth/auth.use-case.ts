@@ -13,10 +13,6 @@ import { signToken as signTokenHelper } from '@/infra/helpers/jwt';
 export class AuthUseCase implements IAuthUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public signToken(user: UserEntity): string {
-    return signTokenHelper(user);
-  }
-
   public async verifyPayload(payload: JwtPayload): Promise<UserEntity> {
     const user: UserEntity = await this.userRepository.findByEmail(payload.email);
 
