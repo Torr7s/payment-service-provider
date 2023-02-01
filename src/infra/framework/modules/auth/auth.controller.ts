@@ -36,7 +36,7 @@ export class AuthController {
 
   @Post('signup') 
   @HttpCode(HttpStatus.CREATED)
-  public async signUp(@Body() signUpDto: SignUpDto): Promise<UserEntity> {
+  public async signUp(@Body() signUpDto: SignUpDto): Promise<{ user: UserEntity }> {
     return this.authSignUpUseCase.exec(signUpDto);
   }
 
