@@ -8,8 +8,6 @@ import { IAuthUseCase } from '@/domain/use-cases/auth';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { UserEntity } from '@/domain/entities/user.entity';
 
-import { signToken as signTokenHelper } from '@/infra/helpers/jwt';
-
 export class AuthUseCase implements IAuthUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
