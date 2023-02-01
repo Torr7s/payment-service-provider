@@ -1,16 +1,22 @@
 import { HttpStatus } from '@nestjs/common';
 
+import { UseCase } from '../../use-case';
+
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { UserException } from '@/app/exceptions/user.exception';
 import { UserEntity } from '@/domain/entities/user.entity';
 
-import { IFindUserByIdUseCase } from '@/domain/use-cases/users/find-user-by-id.use-case';
+import { FindUserByIdUseCaseInput, FindUserByIdUseCaseOutput } from '@/domain/use-cases/users/find-user-by-id.use-case';
 
-export class FindUserByIdUseCase implements IFindUserByIdUseCase {
+export class FindUserByIdUseCase implements
+  UseCase<
+    FindUserByIdUseCaseInput,
+    FindUserByIdUseCaseOutput
+  > {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public async exec(id: string): Promise<UserEntity> {
-    const user: UserEntity = await this.userRepository.findById(id);
+  public async exec(input: FindUserByIdUseCaseInput): Promise<FindUserByIdUseCaseOutput> {
+    const user: UserEntity = await this.userRepository.findById(input.id);
 
     if (!user) {
       throw new UserException(
@@ -21,6 +27,8 @@ export class FindUserByIdUseCase implements IFindUserByIdUseCase {
 
     delete user.password;
 
-    return user;
+    return {
+      user
+    }
   }
 }

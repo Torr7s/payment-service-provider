@@ -1,5 +1,9 @@
 import { UserEntity } from '@/domain/entities/user.entity';
 
-export interface IFindUserByIdUseCase {
-  exec: (id: string) => Promise<UserEntity>;
+export interface FindUserByIdUseCaseInput {
+  id: string;
+}
+
+export interface FindUserByIdUseCaseOutput {
+  user: UserEntity;
 }

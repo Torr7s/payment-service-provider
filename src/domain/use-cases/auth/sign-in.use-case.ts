@@ -1,10 +1,10 @@
 import { UserEntity } from '@/domain/entities/user.entity';
 
-export interface IAuthSignInRequest {
+export interface AuthSignInInput {
   email: string;
   password: string;
 }
 
-export interface IAuthSignInUseCase {
-  exec: (input: IAuthSignInRequest) => Promise<UserEntity>;
+export interface AuthSignInOutput {
+  user: UserEntity;
 }

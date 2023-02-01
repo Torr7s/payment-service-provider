@@ -1,22 +1,28 @@
 import { HttpStatus } from '@nestjs/common';
 import { PayableStatus } from '@prisma/client';
 
+import { UseCase } from '../../use-case';
+
 import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
-import { PayableException } from '@/app/exceptions/payable.exception';
 import { PayableEntity } from '@/domain/entities/payable.entity';
+import { PayableException } from '@/app/exceptions/payable.exception';
 
-import { IListPayablesUseCase } from '@/domain/use-cases/payable/list-payables.use-case';
+import { ListUserPayablesUseCaseInput, ListUserPayablesUseCaseOutput } from '@/domain/use-cases/payable/list-payables.use-case';
 
-export class ListPayablesUseCase implements IListPayablesUseCase {
+export class ListUserPayablesUseCase implements
+  UseCase<
+    ListUserPayablesUseCaseInput,
+    ListUserPayablesUseCaseOutput
+  > {
   constructor(private readonly payableRepository: PayableRepository) {}
 
-  public async exec(userId: string, payableStatus: PayableStatus): Promise<Array<PayableEntity>> {
+  public async exec(input: ListUserPayablesUseCaseInput): Promise<ListUserPayablesUseCaseOutput> {
     const status = {
       available: PayableStatus.paid,
       waiting_funds: PayableStatus.waiting_funds
     }
 
-    const statusMatched: PayableStatus = status[payableStatus];
+    const statusMatched: PayableStatus = status[input.payableStatus];
 
     if (!statusMatched) {
       throw new PayableException(
@@ -25,6 +31,10 @@ export class ListPayablesUseCase implements IListPayablesUseCase {
       );
     }
 
-    return this.payableRepository.listUserPayables(userId, statusMatched);
+    const payables: PayableEntity[] = await this.payableRepository.listUserPayables(input.userId, statusMatched);
+
+    return {
+      payables
+    }
   }
 }
