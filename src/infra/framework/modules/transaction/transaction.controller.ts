@@ -14,7 +14,7 @@ import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
-import { ListTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
+import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
 
 import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
 
@@ -26,7 +26,7 @@ import { TransactionEntity } from '@/domain/entities/transaction.entity';
 export class TransactionController {
   constructor(
     private readonly createTransactionUseCase: CreateTransactionUseCase,
-    private readonly listTransactionsUseCase: ListTransactionsUseCase
+    private readonly listUserTransactionsUseCase: ListUserTransactionsUseCase
   ) {}
 
   @Post()
@@ -34,7 +34,7 @@ export class TransactionController {
   public async create(
     @AuthUser() user: UserEntity,
     @Body() createTransactionDto: CreateTransactionDto
-  ): Promise<TransactionEntity> {
+  ): Promise<{ transaction: TransactionEntity }> {
     return this.createTransactionUseCase.exec({
       ...createTransactionDto,
       userId: user.id
@@ -43,7 +43,7 @@ export class TransactionController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  public async list(@AuthUser() user: UserEntity): Promise<Array<TransactionEntity>> {
-    return this.listTransactionsUseCase.exec(user.id);
+  public async list(@AuthUser() user: UserEntity): Promise<{ transactions: TransactionEntity[] }> {
+    return this.listUserTransactionsUseCase.exec({ userId: user.id });
   }
 }

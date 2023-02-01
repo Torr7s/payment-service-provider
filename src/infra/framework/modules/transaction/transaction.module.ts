@@ -6,11 +6,10 @@ import { PayableRepository } from '@/app/abstracts/repositories/payable.reposito
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
-import { AuthUseCase } from '@/app/use-cases/auth/auth';
 import { CreatePayableUseCase } from '@/app/use-cases/payables/create-payable';
 
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
-import { ListTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
+import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
@@ -41,12 +40,6 @@ import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.
       inject: [PrismaService]
     },
     {
-      provide: AuthUseCase,
-      useFactory: (userRepository: UserRepository): AuthUseCase =>
-        new AuthUseCase(userRepository),
-      inject: [UserRepository]
-    },
-    {
       provide: CreatePayableUseCase,
       useFactory: (payableRepository: PayableRepository): CreatePayableUseCase =>
         new CreatePayableUseCase(payableRepository),
@@ -62,9 +55,9 @@ import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.
       inject: [CreatePayableUseCase, TransactionRepository]
     },
     {
-      provide: ListTransactionsUseCase,
-      useFactory: (transactionRepository: TransactionRepository): ListTransactionsUseCase =>
-        new ListTransactionsUseCase(transactionRepository),
+      provide: ListUserTransactionsUseCase,
+      useFactory: (transactionRepository: TransactionRepository): ListUserTransactionsUseCase =>
+        new ListUserTransactionsUseCase(transactionRepository),
       inject: [TransactionRepository]
     }
   ]
