@@ -39,9 +39,8 @@ import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.
     },
     {
       provide: AuthSignUpUseCase,
-      useFactory: (authRepository: AuthRepository, userRepository: UserRepository): AuthSignUpUseCase =>
+      useFactory: (userRepository: UserRepository): AuthSignUpUseCase =>
         new AuthSignUpUseCase(
-          authRepository, 
           userRepository
         ),
       inject: [AuthRepository, UserRepository]
