@@ -11,7 +11,6 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
-import { AuthUseCase } from '@/app/use-cases/auth/auth';
 import { AuthSignInUseCase } from '@/app/use-cases/auth/sign-in';
 import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
 
@@ -38,12 +37,6 @@ import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.
       useFactory: (prismaService: PrismaService): PrismaUserRepository =>
         new PrismaUserRepository(prismaService),
       inject: [PrismaService]
-    },
-    {
-      provide: AuthUseCase,
-      useFactory: (userRepository: UserRepository): AuthUseCase => 
-        new AuthUseCase(userRepository),
-      inject: [UserRepository]
     },
     {
       provide: AuthSignInUseCase,
