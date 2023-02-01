@@ -16,7 +16,6 @@ import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
-import { PrismaAuthRepository } from '@/infra/database/prisma/repositories/auth.repository';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.repository';
 
 @Module({
@@ -26,12 +25,6 @@ import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.
   controllers: [AuthController],
   providers: [
     PrismaService,
-    {
-      provide: AuthRepository,
-      useFactory: (prismaService: PrismaService): PrismaAuthRepository =>
-        new PrismaAuthRepository(prismaService),
-      inject: [PrismaService]
-    },
     {
       provide: UserRepository,
       useFactory: (prismaService: PrismaService): PrismaUserRepository =>
