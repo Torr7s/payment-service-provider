@@ -1,36 +1,36 @@
 import { Response } from 'express';
-import { 
-  CallHandler, 
-  ExecutionContext, 
-  Injectable, 
-  NestInterceptor 
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
-import { AuthUseCase } from '@/app/use-cases/auth/auth';
-
 import { UserEntity } from '@/domain/entities/user.entity';
+
+import { signToken } from '@/infra/helpers/jwt';
 
 @Injectable()
 export class TokenInterceptor implements NestInterceptor {
-  constructor(private readonly authUseCase: AuthUseCase) {}
-
   public intercept(context: ExecutionContext, next: CallHandler<UserEntity>): Observable<UserEntity> {
     return next.handle().pipe(
-      map(user => {
-        const response: Response = context.switchToHttp().getResponse<Response>();
-        const token: string = this.authUseCase.signToken(user);
+      map(
+        (user: UserEntity): UserEntity => {
+          const response: Response = context.switchToHttp().getResponse<Response>();
+          const token: string = signToken(user);
 
-        response.setHeader('Authorization', `Bearer ${token}`);
-        response.cookie('token', token, {
-          httpOnly: true,
-          signed: true,
-          sameSite: 'strict',
-          secure: process.env.STAGE === 'production'
-        });
+          response.setHeader('Authorization', `Bearer ${token}`);
+          response.cookie('token', token, {
+            httpOnly: true,
+            signed: true,
+            sameSite: 'strict',
+            secure: process.env.STAGE === 'production'
+          });
 
-        return user;
-      })
+          return user;
+        }
+      )
     );
   }
 }
