@@ -8,7 +8,6 @@ import { SessionSerializer } from './session.serializer';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 
-import { AuthRepository } from '@/app/abstracts/repositories/auth.repository';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 import { AuthSignInUseCase } from '@/app/use-cases/auth/sign-in';
@@ -43,7 +42,7 @@ import { PrismaUserRepository } from '@/infra/database/prisma/repositories/user.
         new AuthSignUpUseCase(
           userRepository
         ),
-      inject: [AuthRepository, UserRepository]
+      inject: [UserRepository]
     },
     LocalStrategy, JwtStrategy, SessionSerializer
   ]
