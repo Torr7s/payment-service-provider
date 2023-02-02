@@ -10,10 +10,10 @@ export class ListUserTransactionsUseCase implements
     ListUserTransactionsUseCaseInput,
     ListUserTransactionsUseCaseOutput
   > {
-  constructor(private readonly repository: TransactionRepository) {}
+  constructor(private readonly transactionRepository: TransactionRepository) {}
 
   public async exec(input: ListUserTransactionsUseCaseInput): Promise<ListUserTransactionsUseCaseOutput> {
-    const transactions: TransactionEntity[] = await this.repository.listUserTransactions(input.userId);
+    const transactions: TransactionEntity[] = await this.transactionRepository.listUserTransactions(input.userId);
 
     return {
       transactions
