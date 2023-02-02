@@ -13,7 +13,7 @@ import { AuthUser } from '../auth/decorators/auth-user.decorator';
 import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
-import { ListPayablesUseCase } from '@/app/use-cases/payables/list-payables';
+import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-payables';
 
 import { UserEntity } from '@/domain/entities/user.entity';
 import { PayableEntity } from '@/domain/entities/payable.entity';
@@ -21,14 +21,17 @@ import { PayableEntity } from '@/domain/entities/payable.entity';
 @Controller('payables')
 @UseGuards(SessionAuthGuard, JwtAuthGuard)
 export class PayableController {
-  constructor(private readonly listPayablesUseCase: ListPayablesUseCase) {}
+  constructor(private readonly listUserPayablesUseCase: ListUserPayablesUseCase) { }
 
   @Get(':status')
   @HttpCode(HttpStatus.OK)
   public async list(
     @AuthUser() user: UserEntity,
     @Param('status') status: PayableStatus
-  ): Promise<Array<PayableEntity>> {
-    return this.listPayablesUseCase.exec(user.id, status);
+  ): Promise<{ payables: PayableEntity[] }> {
+    return this.listUserPayablesUseCase.exec({
+      userId: user.id,
+      payableStatus: status
+    });
   }
 }
