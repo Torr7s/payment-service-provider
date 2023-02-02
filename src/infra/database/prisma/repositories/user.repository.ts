@@ -9,20 +9,4 @@ export class PrismaUserRepository implements UserRepository {
   public async create(data: UserEntity): Promise<UserEntity> {
     return this.prismaService.user.create({ data });
   }
-
-  public async findByEmail(email: string): Promise<UserEntity> {
-    return this.prismaService.user.findUnique({
-      where: {
-        email
-      }
-    });
-  }
-
-  public async findById(id: string): Promise<UserEntity> {
-    return this.prismaService.user.findUnique({
-      where: {
-        id
-      }
-    });
-  }
 }
