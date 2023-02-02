@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client';
+
 import { PrismaService } from '../prisma.service';
 
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
@@ -8,5 +10,9 @@ export class PrismaUserRepository implements UserRepository {
 
   public async create(data: UserEntity): Promise<UserEntity> {
     return this.prismaService.user.create({ data });
+  }
+
+  public async findOne(where: Prisma.UserWhereUniqueInput): Promise<UserEntity> {
+    return this.prismaService.user.findUnique({ where });
   }
 }
