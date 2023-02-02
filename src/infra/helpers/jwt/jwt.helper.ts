@@ -8,7 +8,7 @@ const jwtService = new JwtService({
   secret: process.env.JWT_SECRET_KEY,
   signOptions: {
     algorithm: 'HS384',
-    expiresIn: '1d'
+    expiresIn: '12h'
   },
   verifyOptions: {
     algorithms: [
@@ -20,8 +20,7 @@ const jwtService = new JwtService({
 
 export const signToken = (user: UserEntity): string => {
   const payload: JwtPayload = {
-    sub: user.id,
-    email: user.email
+    sub: user.email
   }
 
   return jwtService.sign(payload);
