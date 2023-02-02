@@ -5,7 +5,7 @@ import { PayableController } from './payable.controller';
 import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 
-import { ListPayablesUseCase } from '@/app/use-cases/payables/list-payables';
+import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-payables';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
@@ -29,9 +29,9 @@ import { PrismaTransactionRepository } from '@/infra/database/prisma/repositorie
       inject: [PrismaService]
     },
     {
-      provide: ListPayablesUseCase,
-      useFactory: (payableRepository: PayableRepository): ListPayablesUseCase => 
-        new ListPayablesUseCase(payableRepository),
+      provide: ListUserPayablesUseCase,
+      useFactory: (payableRepository: PayableRepository): ListUserPayablesUseCase => 
+        new ListUserPayablesUseCase(payableRepository),
       inject: [PayableRepository]
     }
   ]
