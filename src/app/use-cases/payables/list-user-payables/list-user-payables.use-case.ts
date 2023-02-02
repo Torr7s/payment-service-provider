@@ -7,7 +7,7 @@ import { PayableRepository } from '@/app/abstracts/repositories/payable.reposito
 import { PayableEntity } from '@/domain/entities/payable.entity';
 import { PayableException } from '@/app/exceptions/payable.exception';
 
-import { ListUserPayablesUseCaseInput, ListUserPayablesUseCaseOutput } from '@/domain/use-cases/payable/list-payables.use-case';
+import { ListUserPayablesUseCaseInput, ListUserPayablesUseCaseOutput } from '@/domain/use-cases/payable';
 
 export class ListUserPayablesUseCase implements
   UseCase<
