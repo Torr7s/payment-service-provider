@@ -1,6 +1,7 @@
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 import { UserEntity } from '@/domain/entities/user.entity';
+import { Prisma } from '@prisma/client';
 
 export class UserInMemoryRepository implements UserRepository {
   private readonly users: Array<UserEntity>;
@@ -15,11 +16,10 @@ export class UserInMemoryRepository implements UserRepository {
     return this.users[element - 1];
   }
 
-  public async findByEmail(email: string): Promise<UserEntity> {
-    return this.users.find(user => user.email === email);
-  }
-
-  public async findById(id: string): Promise<UserEntity> {
-    return this.users.find(user => user.id === id);
+  public async findOne(where: Prisma.UserWhereUniqueInput): Promise<UserEntity> {
+    return this.users.find(user => 
+      user.id === where.id || 
+      user.email === where.email
+    );
   }
 }
