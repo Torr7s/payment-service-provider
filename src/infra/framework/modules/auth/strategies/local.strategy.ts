@@ -15,7 +15,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     });
   }
 
-  public async validate(email: string, password: string): Promise<UserEntity> {
+  public async validate(email: string, password: string): Promise<{ user: UserEntity }> {
     return this.signInUseCase.exec({
       email,
       password
