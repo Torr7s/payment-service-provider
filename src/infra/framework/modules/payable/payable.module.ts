@@ -5,7 +5,7 @@ import { PayableController } from './payable.controller';
 import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 
-import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-payables';
+import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-user-payables';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 

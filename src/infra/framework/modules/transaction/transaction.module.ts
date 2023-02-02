@@ -9,7 +9,7 @@ import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { CreatePayableUseCase } from '@/app/use-cases/payables/create-payable';
 
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
-import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
+import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-user-transactions';
 
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 

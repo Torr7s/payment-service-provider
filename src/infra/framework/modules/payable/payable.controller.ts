@@ -13,7 +13,7 @@ import { AuthUser } from '../auth/decorators/auth-user.decorator';
 import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
-import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-payables';
+import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-user-payables';
 
 import { UserEntity } from '@/domain/entities/user.entity';
 import { PayableEntity } from '@/domain/entities/payable.entity';

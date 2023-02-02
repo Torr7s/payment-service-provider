@@ -14,7 +14,7 @@ import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
-import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-transactions';
+import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-user-transactions';
 
 import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
 
