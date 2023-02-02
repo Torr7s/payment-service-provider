@@ -15,10 +15,12 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     });
   }
 
-  public async validate(email: string, password: string): Promise<{ user: UserEntity }> {
-    return this.signInUseCase.exec({
+  public async validate(email: string, password: string): Promise<UserEntity> {
+    const { user } = await this.signInUseCase.exec({
       email,
       password
     });
+
+    return user;
   }
 }
