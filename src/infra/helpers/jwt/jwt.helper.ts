@@ -21,8 +21,7 @@ const jwtService = new JwtService({
 export const signToken = (user: UserEntity): string => {
   const payload: JwtPayload = {
     sub: user.id,
-    email: user.email,
-    consumerId: user.id
+    email: user.email
   }
 
   return jwtService.sign(payload);
