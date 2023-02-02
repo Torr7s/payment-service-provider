@@ -17,8 +17,25 @@ export function setup(app: INestApplication): INestApplication {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   app.use(sessionConfig);
+  
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.enableCors({
+    origin: '*',
+    methods: [
+      'GET', 
+      'POST'
+    ],
+    allowedHeaders: [
+      'Acess',
+      'Content-Type',
+      'Authorization',
+      'Accept',
+      'Origin',
+      'X-Requested-With'
+    ]
+  });
 
   app.use(cookieParser(process.env.JWT_SECRET_KEY));
 
