@@ -18,16 +18,13 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  public async validate(payload: JwtPayload): Promise<{ user: UserEntity }> {
-    /**
-     * TODO:
-     * 
-     * Check why payload.sub is not being fullfiled correctly, resulting in a Prisma.ClientKnownValidationError
-     */
+  public async validate(payload: JwtPayload): Promise<UserEntity> {
     let user: UserEntity;
 
     try {
-      user = await this.userRepository.findByEmail(payload.sub);
+      user = await this.userRepository.findOne({
+        email: payload.sub
+      });
     } catch (error) {
       throw new UnauthorizedException(
         'Invalid user credentials'
@@ -36,8 +33,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
     delete user.password;
 
-    return {
-      user
-    }
+    return user
   }
 }
