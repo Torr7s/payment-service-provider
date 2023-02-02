@@ -19,7 +19,9 @@ export class AuthSignUpUseCase implements
   constructor(private readonly userRepository: UserRepository) {}
 
   public async exec(input: AuthSignUpInput): Promise<AuthSignUpOutput> {
-    const userAlreadyExists: UserEntity = await this.userRepository.findByEmail(input.email);
+    const userAlreadyExists: UserEntity = await this.userRepository.findOne({
+      email: input.email
+    });
 
     if (userAlreadyExists) {
       throw new AuthException(

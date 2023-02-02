@@ -18,7 +18,9 @@ export class AuthSignInUseCase implements
   constructor(private readonly userRepository: UserRepository) {}
 
   public async exec(input: AuthSignInInput): Promise<AuthSignInOutput> {
-    const user: UserEntity = await this.userRepository.findByEmail(input.email);
+    const user: UserEntity = await this.userRepository.findOne({
+      email: input.email
+    });
 
     if (!user) {
       throw new AuthException(
