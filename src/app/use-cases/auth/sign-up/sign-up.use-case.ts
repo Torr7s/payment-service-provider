@@ -9,7 +9,7 @@ import { AuthSignUpInput, AuthSignUpOutput } from '@/domain/use-cases/auth';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { UserEntity } from '@/domain/entities/user.entity';
 
-import { hashString } from '@/infra/helpers/bcrypt';
+import { BcryptHelper } from '@/infra/helpers/bcrypt';
 
 export class AuthSignUpUseCase implements
   UseCase<
@@ -30,10 +30,9 @@ export class AuthSignUpUseCase implements
       );
     }
 
-    const user: UserEntity = await this.userRepository.create({
-      ...input,
-      password: await hashString(input.password)
-    });
+    input.password = await BcryptHelper.hashString(input.password)
+
+    const user: UserEntity = await this.userRepository.create(input);
 
     delete user.password;
 

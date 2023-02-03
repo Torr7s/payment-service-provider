@@ -9,7 +9,7 @@ import { AuthSignInInput, AuthSignInOutput } from '@/domain/use-cases/auth';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { UserEntity } from '@/domain/entities/user.entity';
 
-import { compareStrings } from '@/infra/helpers/bcrypt';
+import { BcryptHelper } from '@/infra/helpers/bcrypt';
 
 export class AuthSignInUseCase implements
   UseCase<
@@ -30,7 +30,7 @@ export class AuthSignInUseCase implements
       );
     }
 
-    const validPassword: boolean = await compareStrings(input.password, user.password);
+    const validPassword: boolean = await BcryptHelper.compareStrings(input.password, user.password);
 
     if (!validPassword) {
       throw new AuthException(
