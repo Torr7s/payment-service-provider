@@ -3,3 +3,10 @@ export type JwtPayload = {
   iat?: string;
   exp?: string;
 }
+
+export type UserWhereFilter = {
+  email?: string;
+  id?: string;
+}
+
+export type PayableStatus = 'paid' | 'waiting_funds';
