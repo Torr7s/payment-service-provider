@@ -1,9 +1,9 @@
-import { Prisma } from '@prisma/client';
+import { UserWhereFilter } from '@/@types';
 
 import { UserEntity } from '@/domain/entities/user.entity';
 
 export interface FindUserUseCaseInput {
-  where: Prisma.UserWhereUniqueInput;
+  where: UserWhereFilter;
 }
 
 export interface FindUserUseCaseOutput {
