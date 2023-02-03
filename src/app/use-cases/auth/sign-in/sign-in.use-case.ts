@@ -1,5 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 
+import { UseCase } from '../../use-case';
+
 import { AuthException } from '@/app/exceptions/auth.exception';
 
 import { AuthSignInInput, AuthSignInOutput } from '@/domain/use-cases/auth';
@@ -8,7 +10,6 @@ import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { UserEntity } from '@/domain/entities/user.entity';
 
 import { compareStrings } from '@/infra/helpers/bcrypt';
-import { UseCase } from '../../use-case';
 
 export class AuthSignInUseCase implements
   UseCase<
