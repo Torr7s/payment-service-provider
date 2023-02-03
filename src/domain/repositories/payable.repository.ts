@@ -1,6 +1,6 @@
-import { PayableStatus } from '@prisma/client';
-
 import { PayableEntity } from '../entities/payable.entity';
+
+import { PayableStatus } from '@/@types';
 
 export interface IPayableRepository {
   create: (data: PayableEntity) => Promise<PayableEntity>;

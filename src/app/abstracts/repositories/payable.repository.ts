@@ -1,7 +1,6 @@
-import { PayableStatus } from '@prisma/client';
+import { PayableStatus } from '@/@types';
 
 import { PayableEntity } from '@/domain/entities/payable.entity';
-
 import { IPayableRepository } from '@/domain/repositories/payable.repository';
 
 export abstract class PayableRepository implements IPayableRepository {
