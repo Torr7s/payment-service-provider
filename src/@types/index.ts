@@ -10,3 +10,5 @@ export type UserWhereFilter = {
 }
 
 export type PayableStatus = 'paid' | 'waiting_funds';
+
+export type PaymentMethod = 'credit_card' | 'debit_card';
