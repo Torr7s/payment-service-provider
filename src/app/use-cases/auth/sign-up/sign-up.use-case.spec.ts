@@ -1,14 +1,15 @@
 import { AuthSignUpUseCase } from './sign-up.use-case';
 
+import { AuthException } from '@/app/exceptions/auth.exception';
+
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { AuthSignUpInput, AuthSignUpOutput } from '@/domain/use-cases/auth';
 
 import { UserInMemoryRepository } from '@/infra/database/prisma/repositories/in-memory/user-memory.repository';
-import { AuthException } from '@/app/exceptions/auth.exception';
 
 describe('AuthSignUpUseCase', (): void => {
   let userRepository: UserRepository;
-  let authSignUpUseCase: AuthSignUpUseCase
+  let authSignUpUseCase: AuthSignUpUseCase;
 
   const fullName = 'John Doe';
   const email = 'johndoe@example.com';
