@@ -41,4 +41,22 @@ describe('AuthSignUpUseCase', (): void => {
       })
     ).resolves.toBe(output.user);
   });
+
+  it('should not create a user if email is already taken', async (): Promise<void> => {
+    const input: AuthSignUpInput = {
+      fullName,
+      email,
+      password
+    }
+
+    await authSignUpUseCase.exec(input);
+
+    await expect(
+      authSignUpUseCase.exec({
+        fullName: 'Torres',
+        email: 'johndoe@example.com',
+        password: 'thisisthehardestpasswordever'
+      })
+    ).rejects.toBeInstanceOf(AuthException);
+  });
 });
