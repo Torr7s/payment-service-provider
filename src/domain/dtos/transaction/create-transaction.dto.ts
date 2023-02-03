@@ -1,4 +1,3 @@
-import { Prisma, PaymentMethod } from '@prisma/client';
 import { 
   IsDateString, 
   IsDecimal, 
@@ -8,10 +7,12 @@ import {
   MinLength 
 } from 'class-validator';
 
+import { PaymentMethod } from '@/@types';
+
 export class CreateTransactionDto {
   @IsDecimal()
   @IsNotEmpty()
-  value: string | Prisma.Decimal;
+  value: string;
 
   @IsString()
   @IsNotEmpty()

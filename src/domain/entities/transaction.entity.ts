@@ -1,10 +1,12 @@
-import { PaymentMethod, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
+
+import { PaymentMethod } from '@/@types';
 
 import { BaseEntity } from './base.entity';
 import { PayableEntity } from './payable.entity';
 
 export class TransactionEntity extends BaseEntity {
-  value: string | number | Prisma.Decimal;
+  value: string | Prisma.Decimal;
   description: string;
   paymentMethod: PaymentMethod;
   cardNumber: string;

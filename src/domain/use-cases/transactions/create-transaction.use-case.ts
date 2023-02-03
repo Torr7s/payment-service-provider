@@ -1,9 +1,9 @@
-import { PaymentMethod, Prisma } from '@prisma/client';
+import { PaymentMethod } from '@/@types';
 
 import { TransactionEntity } from '@/domain/entities/transaction.entity';
 
 export interface CreateTransactionUseCaseInput {
-  value: string | Prisma.Decimal;
+  value: string;
   description: string;
   paymentMethod: PaymentMethod;
   cardNumber: string;
