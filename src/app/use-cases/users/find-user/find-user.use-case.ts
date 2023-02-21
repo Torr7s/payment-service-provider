@@ -3,10 +3,18 @@ import { HttpStatus } from '@nestjs/common';
 import { UseCase } from '../../use-case';
 
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-import { UserEntity } from '@/domain/entities/user.entity';
+import { UserEntity } from '@/app/entities/user.entity';
 import { UserException } from '@/app/exceptions/user.exception';
 
-import { FindUserUseCaseInput, FindUserUseCaseOutput } from '@/domain/use-cases/users';
+import { UserWhereFilter } from '@/@types';
+
+export interface FindUserUseCaseInput {
+  where: UserWhereFilter;
+}
+
+export interface FindUserUseCaseOutput {
+  user: UserEntity;
+}
 
 export class FindUserUseCase implements
   UseCase<

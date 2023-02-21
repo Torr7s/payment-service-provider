@@ -1,9 +1,8 @@
-import { AuthSignInUseCase } from './sign-in.use-case';
+import { AuthSignInInput, AuthSignInUseCase } from './sign-in.use-case';
 
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-import { AuthSignInInput } from '@/domain/use-cases/auth';
 
-import { UserInMemoryRepository } from '@/infra/database/prisma/repositories/in-memory/user-memory.repository';
+import { UserInMemoryRepository } from '@/infra/database/repositories/in-memory/user-memory.repository';
 
 describe('AuthSignInUseCase', (): void => {
   let userRepository: UserRepository;

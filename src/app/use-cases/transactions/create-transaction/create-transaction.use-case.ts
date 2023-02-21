@@ -6,9 +6,24 @@ import { CreatePayableUseCase } from '../../payables/create-payable';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 import { TransactionException } from '@/app/exceptions/transaction.exception';
-import { TransactionEntity } from '@/domain/entities/transaction.entity';
+import { TransactionEntity } from '@/app/entities/transaction.entity';
 
-import { CreateTransactionUseCaseInput, CreateTransactionUseCaseOutput } from '@/domain/use-cases/transactions';
+import { PaymentMethod } from '@/@types';
+
+export interface CreateTransactionUseCaseInput {
+  value: string;
+  description: string;
+  paymentMethod: PaymentMethod;
+  cardNumber: string;
+  cardOwnerName: string;
+  cardExpirationDate: string | Date;
+  cardCVV: string;
+  userId: string;
+}
+
+export interface CreateTransactionUseCaseOutput {
+  transaction: TransactionEntity;
+}
 
 export class CreateTransactionUseCase implements
   UseCase<

@@ -4,12 +4,19 @@ import { UseCase } from '../../use-case';
 
 import { AuthException } from '@/app/exceptions/auth.exception';
 
-import { AuthSignInInput, AuthSignInOutput } from '@/domain/use-cases/auth';
-
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-import { UserEntity } from '@/domain/entities/user.entity';
+import { UserEntity } from '@/app/entities/user.entity';
 
 import { BcryptHelper } from '@/infra/helpers/bcrypt';
+
+export interface AuthSignInInput {
+  email: string;
+  password: string;
+}
+
+export interface AuthSignInOutput {
+  user: UserEntity;
+}
 
 export class AuthSignInUseCase implements
   UseCase<

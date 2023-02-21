@@ -1,9 +1,15 @@
 import { UseCase } from '../../use-case';
 
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
-import { TransactionEntity } from '@/domain/entities/transaction.entity';
+import { TransactionEntity } from '@/app/entities/transaction.entity';
 
-import { ListUserTransactionsUseCaseInput, ListUserTransactionsUseCaseOutput } from '@/domain/use-cases/transactions';
+export interface ListUserTransactionsUseCaseInput {
+  userId: string;
+}
+
+export interface ListUserTransactionsUseCaseOutput {
+  transactions: TransactionEntity[];
+}
 
 export class ListUserTransactionsUseCase implements
   UseCase<
