@@ -1,11 +1,14 @@
+import { Injectable } from '@nestjs/common';
+
 import { PayableStatus } from '@prisma/client';
 
 import { PrismaService } from '../prisma.service';
 
 import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
 
-import { PayableEntity } from '@/domain/entities/payable.entity';
+import { PayableEntity } from '@/app/entities/payable.entity';
 
+@Injectable()
 export class PrismaPayableRepository implements PayableRepository {
   private readonly _include = {
     transaction: {
