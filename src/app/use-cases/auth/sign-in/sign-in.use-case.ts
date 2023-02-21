@@ -7,7 +7,7 @@ import { AuthException } from '@/app/exceptions/auth.exception';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 import { UserEntity } from '@/app/entities/user.entity';
 
-import { BcryptHelper } from '@/helpers/bcrypt';
+import { BcryptHelper } from '@/app/helpers/bcrypt';
 
 export interface AuthSignInInput {
   email: string;
