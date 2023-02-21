@@ -1,9 +1,8 @@
 import { UserWhereFilter } from '@/@types';
 
-import { UserEntity } from '@/domain/entities/user.entity';
-import { IUserRepository } from '@/domain/repositories/user.repository';
+import { UserEntity } from '@/app/entities/user.entity';
 
-export abstract class UserRepository implements IUserRepository {
+export abstract class UserRepository {
   public abstract create: (data: UserEntity) => Promise<UserEntity>;
   public abstract findOne: (where: UserWhereFilter) => Promise<UserEntity>;
 }
