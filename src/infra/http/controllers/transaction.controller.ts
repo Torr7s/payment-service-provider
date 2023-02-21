@@ -8,18 +8,18 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { AuthUser } from '../auth/decorators/auth-user.decorator';
+import { AuthUser } from '../core/auth/decorators/auth-user.decorator';
 
-import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { SessionAuthGuard } from '../core/auth/guards/session-auth.guard';
+import { JwtAuthGuard } from '../core/auth/guards/jwt-auth.guard';
 
 import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
 import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-user-transactions';
 
-import { CreateTransactionDto } from '@/domain/dtos/transaction/create-transaction.dto';
+import { CreateTransactionDto } from '@/infra/http/dtos/transaction/create-transaction.dto';
 
-import { UserEntity } from '@/domain/entities/user.entity';
-import { TransactionEntity } from '@/domain/entities/transaction.entity';
+import { UserEntity } from '@/app/entities/user.entity';
+import { TransactionEntity } from '@/app/entities/transaction.entity';
 
 @Controller('transactions')
 @UseGuards(SessionAuthGuard, JwtAuthGuard)

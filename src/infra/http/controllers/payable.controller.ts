@@ -8,20 +8,20 @@ import {
   UseGuards
 } from '@nestjs/common';
 
-import { AuthUser } from '../auth/decorators/auth-user.decorator';
+import { AuthUser } from '../core/auth/decorators/auth-user.decorator';
 
-import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { SessionAuthGuard } from '../core/auth/guards/session-auth.guard';
+import { JwtAuthGuard } from '../core/auth/guards/jwt-auth.guard';
 
 import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-user-payables';
 
-import { UserEntity } from '@/domain/entities/user.entity';
-import { PayableEntity } from '@/domain/entities/payable.entity';
+import { UserEntity } from '@/app/entities/user.entity';
+import { PayableEntity } from '@/app/entities/payable.entity';
 
 @Controller('payables')
 @UseGuards(SessionAuthGuard, JwtAuthGuard)
 export class PayableController {
-  constructor(private readonly listUserPayablesUseCase: ListUserPayablesUseCase) { }
+  constructor(private readonly listUserPayablesUseCase: ListUserPayablesUseCase) {}
 
   @Get(':status')
   @HttpCode(HttpStatus.OK)

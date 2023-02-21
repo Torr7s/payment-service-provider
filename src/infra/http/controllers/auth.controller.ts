@@ -9,18 +9,18 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 
-import { AuthUser } from './decorators/auth-user.decorator';
+import { AuthUser } from '../core/auth/decorators/auth-user.decorator';
 
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { SessionAuthGuard } from './guards/session-auth.guard';
+import { LocalAuthGuard } from '../core/auth/guards/local-auth.guard';
+import { SessionAuthGuard } from '../core/auth/guards/session-auth.guard';
+import { JwtAuthGuard } from '../core/auth/guards/jwt-auth.guard';
 
-import { TokenInterceptor } from './interceptors/token.interceptor';
+import { TokenInterceptor } from '../core/auth/interceptors/token.interceptor';
 
 import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
 
-import { SignUpDto } from '@/domain/dtos/authentication';
-import { UserEntity } from '@/domain/entities/user.entity';
+import { SignUpDto } from '@/infra/http/dtos/authentication';
+import { UserEntity } from '@/app/entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
