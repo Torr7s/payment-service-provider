@@ -6,7 +6,7 @@ import { PayableRepository } from '@/app/abstracts/repositories/payable.reposito
 import { PayableEntity } from '@/app/entities/payable.entity';
 import { TransactionEntity } from '@/app/entities/transaction.entity';
 
-import { calculateFee } from '@/infra/helpers/payable';
+import { calculateFee } from '@/helpers/payable';
 
 export interface CreatePayableUseCaseInput {
   transaction: TransactionEntity;

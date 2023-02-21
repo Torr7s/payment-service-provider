@@ -9,7 +9,7 @@ import { map, Observable } from 'rxjs';
 
 import { UserEntity } from '@/app/entities/user.entity';
 
-import { signToken } from '@/infra/helpers/jwt';
+import { signToken } from '@/helpers/jwt';
 
 @Injectable()
 export class TokenInterceptor implements NestInterceptor {
