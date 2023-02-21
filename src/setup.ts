@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 
 import sessionConfig from './config/session';
 
-import { HttpExceptionFilter } from './infra/framework/exceptions/http-exception.filter';
+import { HttpExceptionFilter } from './infra/http/core/exceptions/http-exception.filter';
 
 export function setup(app: INestApplication): INestApplication {
   app.useGlobalPipes(
