@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { JwtPayload } from '@/@types';
 
-import { UserEntity } from '@/domain/entities/user.entity';
+import { UserEntity } from '@/app/entities/user.entity';
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
 @Injectable()

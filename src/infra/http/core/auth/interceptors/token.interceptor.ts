@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
-import { UserEntity } from '@/domain/entities/user.entity';
+import { UserEntity } from '@/app/entities/user.entity';
 
 import { signToken } from '@/infra/helpers/jwt';
 

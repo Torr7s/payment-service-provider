@@ -4,7 +4,7 @@ import { Strategy } from 'passport-local';
 
 import { AuthSignInUseCase } from '@/app/use-cases/auth/sign-in';
 
-import { UserEntity } from '@/domain/entities/user.entity';
+import { UserEntity } from '@/app/entities/user.entity';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
