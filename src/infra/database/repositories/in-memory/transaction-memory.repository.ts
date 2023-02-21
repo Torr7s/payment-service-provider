@@ -1,6 +1,6 @@
 import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
 
-import { TransactionEntity } from '@/domain/entities/transaction.entity';
+import { TransactionEntity } from '@/app/entities/transaction.entity';
 
 export class TransactionInMemoryRepository implements TransactionRepository {
   private readonly transactions: Array<TransactionEntity>;

@@ -1,6 +1,6 @@
 import { UserRepository } from '@/app/abstracts/repositories/user.repository';
 
-import { UserEntity } from '@/domain/entities/user.entity';
+import { UserEntity } from '@/app/entities/user.entity';
 import { Prisma } from '@prisma/client';
 
 export class UserInMemoryRepository implements UserRepository {
