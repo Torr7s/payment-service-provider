@@ -1,9 +1,11 @@
-import { Config } from 'jest';
+import path from 'node:path';
+import jest from 'jest';
+
+const root: string = path.resolve(__dirname);
 
 export default {
-  roots: [
-    '<rootDir>/src'
-  ],
+  rootDir: root,
+  displayName: 'root-tests',
   moduleFileExtensions: [
     'js',
     'json',
@@ -15,6 +17,7 @@ export default {
   },
   testEnvironment: 'node',
   moduleNameMapper: {
-    '@/(.*)': '<rootDir>/src/$1'
+    '@/src/(.*)': '<rootDir>/src/$1',
+    '@/test/(.*)': '<rootDir>/test/$1'
   }
-} as Config;
+} as jest.Config;
