@@ -1,8 +1,7 @@
 import { AuthSignInInput, AuthSignInUseCase } from './sign-in.use-case';
 
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-
-import { UserInMemoryRepository } from '@/infra/database/repositories/in-memory/user-memory.repository';
+import { UserRepository } from '@/src/app/repositories/user.repository';
+import { UserInMemoryRepository } from '@/test/repositories/in-memory/user-memory.repository';
 
 describe('AuthSignInUseCase', (): void => {
   let userRepository: UserRepository;

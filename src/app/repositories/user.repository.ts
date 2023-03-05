@@ -1,6 +1,5 @@
-import { UserWhereFilter } from '@/@types';
-
-import { UserEntity } from '@/app/entities/user.entity';
+import { UserEntity } from '../entities/user.entity';
+import { UserWhereFilter } from '@/src/types';
 
 export abstract class UserRepository {
   public abstract create: (data: UserEntity) => Promise<UserEntity>;

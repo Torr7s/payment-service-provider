@@ -3,9 +3,9 @@ import { PayableStatus } from '@prisma/client';
 
 import { UseCase } from '../../use-case';
 
-import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
-import { PayableEntity } from '@/app/entities/payable.entity';
-import { PayableException } from '@/app/exceptions/payable.exception';
+import { PayableEntity } from '@/src/app/entities/payable.entity';
+import { PayableRepository } from '@/src/app/repositories/payable.repository';
+import { PayableException } from '@/src/app/exceptions/payable.exception';
 
 export interface ListUserPayablesUseCaseInput {
   userId: string;

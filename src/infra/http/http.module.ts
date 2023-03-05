@@ -11,16 +11,16 @@ import { AuthController } from './controllers/auth.controller';
 import { PayableController } from './controllers/payable.controller';
 import { TransactionController } from './controllers/transaction.controller';
 
-import { AuthSignInUseCase } from '@/app/use-cases/auth/sign-in';
-import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
-import { CreatePayableUseCase } from '@/app/use-cases/payables/create-payable';
-import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-user-payables';
-import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
-import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-user-transactions';
+import { AuthSignInUseCase } from '@/src/app/use-cases/auth/sign-in';
+import { AuthSignUpUseCase } from '@/src/app/use-cases/auth/sign-up';
+import { CreatePayableUseCase } from '@/src/app/use-cases/payables/create-payable';
+import { ListUserPayablesUseCase } from '@/src/app/use-cases/payables/list-user-payables';
+import { CreateTransactionUseCase } from '@/src/app/use-cases/transactions/create-transaction';
+import { ListUserTransactionsUseCase } from '@/src/app/use-cases/transactions/list-user-transactions';
 
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
-import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
+import { UserRepository } from '@/src/app/repositories/user.repository';
+import { PayableRepository } from '@/src/app/repositories/payable.repository';
+import { TransactionRepository } from '@/src/app/repositories/transaction.repository';
 
 @Module({
   imports: [

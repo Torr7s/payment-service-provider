@@ -1,6 +1,6 @@
 import { PaymentMethod, Prisma } from '@prisma/client';
 
-import { TransactionEntity } from '@/app/entities/transaction.entity';
+import { TransactionEntity } from '../../entities/transaction.entity';
 
 enum PaymentMethodFee {
   CREDIT_CARD = 0.05,

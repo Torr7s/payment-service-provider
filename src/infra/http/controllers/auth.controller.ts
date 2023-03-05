@@ -17,10 +17,10 @@ import { JwtAuthGuard } from '../core/auth/guards/jwt-auth.guard';
 
 import { TokenInterceptor } from '../core/auth/interceptors/token.interceptor';
 
-import { AuthSignUpUseCase } from '@/app/use-cases/auth/sign-up';
+import { SignUpDto } from '../dtos/authentication';
 
-import { SignUpDto } from '@/infra/http/dtos/authentication';
-import { UserEntity } from '@/app/entities/user.entity';
+import { UserEntity } from '@/src/app/entities/user.entity';
+import { AuthSignUpUseCase } from '@/src/app/use-cases/auth/sign-up';
 
 @Controller('auth')
 export class AuthController {

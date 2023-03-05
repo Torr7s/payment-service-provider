@@ -13,10 +13,10 @@ import { AuthUser } from '../core/auth/decorators/auth-user.decorator';
 import { SessionAuthGuard } from '../core/auth/guards/session-auth.guard';
 import { JwtAuthGuard } from '../core/auth/guards/jwt-auth.guard';
 
-import { ListUserPayablesUseCase } from '@/app/use-cases/payables/list-user-payables';
+import { ListUserPayablesUseCase } from '@/src/app/use-cases/payables/list-user-payables';
 
-import { UserEntity } from '@/app/entities/user.entity';
-import { PayableEntity } from '@/app/entities/payable.entity';
+import { UserEntity } from '@/src/app/entities/user.entity';
+import { PayableEntity } from '@/src/app/entities/payable.entity';
 
 @Controller('payables')
 @UseGuards(SessionAuthGuard, JwtAuthGuard)

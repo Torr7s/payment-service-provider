@@ -13,13 +13,13 @@ import { AuthUser } from '../core/auth/decorators/auth-user.decorator';
 import { SessionAuthGuard } from '../core/auth/guards/session-auth.guard';
 import { JwtAuthGuard } from '../core/auth/guards/jwt-auth.guard';
 
-import { CreateTransactionUseCase } from '@/app/use-cases/transactions/create-transaction';
-import { ListUserTransactionsUseCase } from '@/app/use-cases/transactions/list-user-transactions';
+import { CreateTransactionDto } from '../dtos/transaction';
 
-import { CreateTransactionDto } from '@/infra/http/dtos/transaction/create-transaction.dto';
+import { CreateTransactionUseCase } from '@/src/app/use-cases/transactions/create-transaction';
+import { ListUserTransactionsUseCase } from '@/src/app/use-cases/transactions/list-user-transactions';
 
-import { UserEntity } from '@/app/entities/user.entity';
-import { TransactionEntity } from '@/app/entities/transaction.entity';
+import { UserEntity } from '@/src/app/entities/user.entity';
+import { TransactionEntity } from '@/src/app/entities/transaction.entity';
 
 @Controller('transactions')
 @UseGuards(SessionAuthGuard, JwtAuthGuard)

@@ -2,11 +2,11 @@ import { PayableStatus, PaymentMethod } from '@prisma/client';
 
 import { UseCase } from '../../use-case';
 
-import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
-import { PayableEntity } from '@/app/entities/payable.entity';
-import { TransactionEntity } from '@/app/entities/transaction.entity';
+import { PayableEntity } from '@/src/app/entities/payable.entity';
+import { TransactionEntity } from '@/src/app/entities/transaction.entity';
+import { PayableRepository } from '@/src/app/repositories/payable.repository';
 
-import { calculateFee } from '@/app/helpers/payable';
+import { calculateFee } from '@/src/app/helpers/payable';
 
 export interface CreatePayableUseCaseInput {
   transaction: TransactionEntity;

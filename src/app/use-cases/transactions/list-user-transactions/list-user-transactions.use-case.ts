@@ -1,7 +1,7 @@
 import { UseCase } from '../../use-case';
 
-import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
-import { TransactionEntity } from '@/app/entities/transaction.entity';
+import { TransactionEntity } from '@/src/app/entities/transaction.entity';
+import { TransactionRepository } from '@/src/app/repositories/transaction.repository';
 
 export interface ListUserTransactionsUseCaseInput {
   userId: string;

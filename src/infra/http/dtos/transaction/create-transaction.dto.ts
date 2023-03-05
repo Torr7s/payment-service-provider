@@ -7,7 +7,7 @@ import {
   MinLength 
 } from 'class-validator';
 
-import { PaymentMethod } from '@/@types';
+import { PaymentMethod } from '@/src/types';
 
 export class CreateTransactionDto {
   @IsDecimal()

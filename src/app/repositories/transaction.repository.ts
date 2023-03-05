@@ -1,4 +1,4 @@
-import { TransactionEntity } from '@/app/entities/transaction.entity';
+import { TransactionEntity } from '../entities/transaction.entity';
 
 export abstract class TransactionRepository {
   public abstract create: (data: TransactionEntity) => Promise<TransactionEntity>;

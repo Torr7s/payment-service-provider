@@ -1,6 +1,5 @@
-import { PayableStatus } from '@/@types';
-
-import { PayableEntity } from '@/app/entities/payable.entity';
+import { PayableEntity } from '../entities/payable.entity';
+import { PayableStatus } from '@/src/types';
 
 export abstract class PayableRepository {
   public abstract create: (data: PayableEntity) => Promise<PayableEntity>;

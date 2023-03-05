@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 
-import { PayableStatus } from '@/@types';
+import { PayableStatus } from '@/src/types';
 
 import { BaseEntity } from './base.entity';
 

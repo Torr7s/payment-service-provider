@@ -4,11 +4,11 @@ import { UseCase } from '../../use-case';
 
 import { CreatePayableUseCase } from '../../payables/create-payable';
 
-import { TransactionRepository } from '@/app/abstracts/repositories/transaction.repository';
-import { TransactionException } from '@/app/exceptions/transaction.exception';
-import { TransactionEntity } from '@/app/entities/transaction.entity';
+import { TransactionException } from '@/src/app/exceptions/transaction.exception';
+import { TransactionEntity } from '@/src/app/entities/transaction.entity';
+import { TransactionRepository } from '@/src/app/repositories/transaction.repository';
 
-import { PaymentMethod } from '@/@types';
+import { PaymentMethod } from '@/src/types';
 
 export interface CreateTransactionUseCaseInput {
   value: string;

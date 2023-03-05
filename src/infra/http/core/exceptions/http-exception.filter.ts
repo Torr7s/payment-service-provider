@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { BaseException } from '@/app/exceptions/base.exception';
+import { BaseException } from '@/src/app/exceptions/base.exception';
 
 type ResponseBody = {
   statusCode: number;

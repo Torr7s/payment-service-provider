@@ -1,10 +1,13 @@
-import { AuthSignUpInput, AuthSignUpOutput, AuthSignUpUseCase } from './sign-up.use-case';
+import { 
+  AuthSignUpInput, 
+  AuthSignUpOutput, 
+  AuthSignUpUseCase 
+} from './sign-up.use-case';
 
-import { AuthException } from '@/app/exceptions/auth.exception';
+import { AuthException } from '@/src/app/exceptions/auth.exception';
 
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-
-import { UserInMemoryRepository } from '@/infra/database/repositories/in-memory/user-memory.repository';
+import { UserRepository } from '@/src/app/repositories/user.repository';
+import { UserInMemoryRepository } from '@/test/repositories/in-memory/user-memory.repository';
 
 describe('AuthSignUpUseCase', (): void => {
   let userRepository: UserRepository;

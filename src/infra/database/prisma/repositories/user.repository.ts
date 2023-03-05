@@ -4,8 +4,8 @@ import { Prisma } from '@prisma/client';
 
 import { PrismaService } from '../prisma.service';
 
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-import { UserEntity } from '@/app/entities/user.entity';
+import { UserEntity } from '@/src/app/entities/user.entity';
+import { UserRepository } from '@/src/app/repositories/user.repository';
 
 @Injectable()
 export class PrismaUserRepository implements UserRepository {

@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 
-import { PaymentMethod } from '@/@types';
+import { PaymentMethod } from '@/src/types';
 
 import { BaseEntity } from './base.entity';
 import { PayableEntity } from './payable.entity';
