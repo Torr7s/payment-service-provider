@@ -1,8 +1,8 @@
 import { PayableStatus } from '@prisma/client';
 
-import { PayableRepository } from '@/app/abstracts/repositories/payable.repository';
+import { PayableRepository } from '@/src/app/repositories/payable.repository';
 
-import { PayableEntity } from '@/app/entities/payable.entity';
+import { PayableEntity } from '@/src/app/entities/payable.entity';
 
 export class PayableInMemoryRepository implements PayableRepository {
   private readonly payables: Array<PayableEntity>;

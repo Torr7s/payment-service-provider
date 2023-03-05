@@ -1,7 +1,8 @@
-import { UserRepository } from '@/app/abstracts/repositories/user.repository';
-
-import { UserEntity } from '@/app/entities/user.entity';
 import { Prisma } from '@prisma/client';
+
+import { UserRepository } from '@/src/app/repositories/user.repository';
+
+import { UserEntity } from '@/src/app/entities/user.entity';
 
 export class UserInMemoryRepository implements UserRepository {
   private readonly users: Array<UserEntity>;
