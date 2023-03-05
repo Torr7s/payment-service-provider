@@ -5,8 +5,7 @@
       "es2020"
     ],
     "module": "commonjs",
-    "rootDir": "src",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": "dist",
@@ -14,15 +13,26 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": [
-        "*"
+      "@/src/*": [
+        "./src/*"
+      ],
+      "@/test/*": [
+        "./test/*"
       ]
     },
+    "rootDirs": [
+      "./src",
+      "./test"
+    ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
-    "src"
+    "./src/**/*.ts",
+    "./test/**/*.ts"
   ],
-  "exclude": []
+  "exclude": [
+    "./node_modules/*",
+    "./dist"
+  ]
 }
