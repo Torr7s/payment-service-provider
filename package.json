@@ -14,7 +14,7 @@
     "prisma:dev": "prisma migrate dev -n",
     "prisma:gen": "prisma generate",
     "start:dev": "cross-env STAGE=dev nest start --watch",
-    "start:prod": "cross-env STAGE=prod node dist/main",
+    "start:prod": "cross-env STAGE=prod node dist/src/main",
     "test": "cross-env STAGE=dev jest",
     "test:watch": "cross-env STAGE=dev jest --watch",
     "test:cov": "cross-env STAGE=dev jest --coverage"
