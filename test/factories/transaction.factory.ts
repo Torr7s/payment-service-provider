@@ -2,7 +2,7 @@ import { PaymentMethod, Prisma } from '@prisma/client';
 
 import { makeCard } from './card.factory';
 
-import { Transaction, TransactionProps } from '../app/entities/transaction';
+import { Transaction, TransactionProps } from '@/src/app/entities/transaction';
 
 export const makeTransaction = (transaction: Partial<TransactionProps> = {}): Transaction => {
   return new Transaction({
