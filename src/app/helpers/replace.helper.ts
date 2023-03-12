@@ -1,0 +1,1 @@
+export type Replace<T, R extends { [Key in keyof T]?: T[Key] }> = Omit<T, keyof R> & R;
