@@ -8,4 +8,13 @@ describe('Card entity', (): void => {
       });
     }).toThrow(new Error('Card number must have a length of 16 characters'));
   });
+
+  it('should create a card', (): void => {
+    const card = makeCard({
+      cardNumber: '4444 4444 4444 4444'
+    });
+
+    expect(card.cvv).toBeDefined();
+    expect(card.number).toBe('4444');
+  });
 });
