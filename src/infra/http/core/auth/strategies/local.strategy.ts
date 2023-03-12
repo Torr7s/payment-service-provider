@@ -4,7 +4,7 @@ import { Strategy } from 'passport-local';
 
 import { AuthSignInUseCase } from '@/src/app/use-cases/auth/sign-in';
 
-import { UserEntity } from '@/src/app/entities/user.entity';
+import { User } from '@/src/app/entities/user';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
@@ -15,7 +15,7 @@ export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
     });
   }
 
-  public async validate(email: string, password: string): Promise<UserEntity> {
+  public async validate(email: string, password: string): Promise<User> {
     const { user } = await this.signInUseCase.exec({
       email,
       password

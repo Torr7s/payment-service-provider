@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { JwtPayload } from '@/src/types';
 
-import { UserEntity } from '@/src/app/entities/user.entity';
+import { User } from '@/src/app/entities/user';
 import { UserRepository } from '@/src/app/repositories/user.repository';
 
 @Injectable()
@@ -18,8 +18,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  public async validate(payload: JwtPayload): Promise<UserEntity> {
-    let user: UserEntity;
+  public async validate(payload: JwtPayload): Promise<User> {
+    let user: User;
 
     try {
       user = await this.userRepository.findOne({

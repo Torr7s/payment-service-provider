@@ -2,7 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 
 import { UseCase } from '../../use-case';
 
-import { UserEntity } from '@/src/app/entities/user.entity';
+import { User } from '@/src/app/entities/user';
 import { UserRepository } from '@/src/app/repositories/user.repository';
 import { AuthException } from '@/src/app/exceptions/auth.exception';
 
@@ -15,7 +15,7 @@ export interface AuthSignUpInput {
 }
 
 export interface AuthSignUpOutput {
-  user: UserEntity;
+  user: User;
 }
 
 export class AuthSignUpUseCase implements
@@ -26,7 +26,7 @@ export class AuthSignUpUseCase implements
   constructor(private readonly userRepository: UserRepository) {}
 
   public async exec(input: AuthSignUpInput): Promise<AuthSignUpOutput> {
-    const userAlreadyExists: UserEntity = await this.userRepository.findOne({
+    const userAlreadyExists: User = await this.userRepository.findOne({
       email: input.email
     });
 
@@ -37,11 +37,14 @@ export class AuthSignUpUseCase implements
       );
     }
 
-    input.password = await BcryptHelper.hashString(input.password)
+    const password: string = await BcryptHelper.hashString(input.password);
 
-    const user: UserEntity = await this.userRepository.create(input);
+    const user = new User({
+      ...input,
+      password
+    });
 
-    delete user.password;
+    await this.userRepository.create(user);
 
     return {
       user

@@ -1,6 +1,6 @@
 import { UseCase } from '../../use-case';
 
-import { TransactionEntity } from '@/src/app/entities/transaction.entity';
+import { Transaction } from '@/src/app/entities/transaction';
 import { TransactionRepository } from '@/src/app/repositories/transaction.repository';
 
 export interface ListUserTransactionsUseCaseInput {
@@ -8,7 +8,7 @@ export interface ListUserTransactionsUseCaseInput {
 }
 
 export interface ListUserTransactionsUseCaseOutput {
-  transactions: TransactionEntity[];
+  transactions: Transaction[];
 }
 
 export class ListUserTransactionsUseCase implements
@@ -19,7 +19,7 @@ export class ListUserTransactionsUseCase implements
   constructor(private readonly transactionRepository: TransactionRepository) {}
 
   public async exec(input: ListUserTransactionsUseCaseInput): Promise<ListUserTransactionsUseCaseOutput> {
-    const transactions: TransactionEntity[] = await this.transactionRepository.listUserTransactions(input.userId);
+    const transactions: Transaction[] = await this.transactionRepository.listUserTransactions(input.userId);
 
     return {
       transactions

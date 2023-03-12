@@ -7,16 +7,16 @@ import {
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
-import { UserEntity } from '@/src/app/entities/user.entity';
+import { User } from '@/src/app/entities/user';
 
 import { signToken } from '../../helpers/jwt';
 
 @Injectable()
 export class TokenInterceptor implements NestInterceptor {
-  public intercept(context: ExecutionContext, next: CallHandler<UserEntity>): Observable<UserEntity> {
+  public intercept(context: ExecutionContext, next: CallHandler<User>): Observable<User> {
     return next.handle().pipe(
       map(
-        (user: UserEntity): UserEntity => {
+        (user: User): User => {
           const response: Response = context.switchToHttp().getResponse<Response>();
           const token: string = signToken(user);
 

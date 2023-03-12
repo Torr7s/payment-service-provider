@@ -2,7 +2,7 @@ import { HttpStatus } from '@nestjs/common';
 
 import { UseCase } from '../../use-case';
 
-import { UserEntity } from '@/src/app/entities/user.entity';
+import { User } from '@/src/app/entities/user';
 import { UserRepository } from '@/src/app/repositories/user.repository';
 import { AuthException } from '@/src/app/exceptions/auth.exception';
 
@@ -14,7 +14,7 @@ export interface AuthSignInInput {
 }
 
 export interface AuthSignInOutput {
-  user: UserEntity;
+  user: User;
 }
 
 export class AuthSignInUseCase implements
@@ -25,7 +25,7 @@ export class AuthSignInUseCase implements
   constructor(private readonly userRepository: UserRepository) {}
 
   public async exec(input: AuthSignInInput): Promise<AuthSignInOutput> {
-    const user: UserEntity = await this.userRepository.findOne({
+    const user: User = await this.userRepository.findOne({
       email: input.email
     });
 
@@ -44,8 +44,6 @@ export class AuthSignInUseCase implements
         HttpStatus.UNAUTHORIZED
       );
     }
-
-    delete user.password;
 
     return {
       user

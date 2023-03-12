@@ -3,7 +3,7 @@ import { PayableStatus } from '@prisma/client';
 
 import { UseCase } from '../../use-case';
 
-import { PayableEntity } from '@/src/app/entities/payable.entity';
+import { Payable } from '@/src/app/entities/payable';
 import { PayableRepository } from '@/src/app/repositories/payable.repository';
 import { PayableException } from '@/src/app/exceptions/payable.exception';
 
@@ -13,7 +13,7 @@ export interface ListUserPayablesUseCaseInput {
 }
 
 export interface ListUserPayablesUseCaseOutput {
-  payables: PayableEntity[];
+  payables: Payable[];
 } 
 
 export class ListUserPayablesUseCase implements
@@ -38,7 +38,7 @@ export class ListUserPayablesUseCase implements
       );
     }
 
-    const payables: PayableEntity[] = await this.payableRepository.listUserPayables(input.userId, statusMatched);
+    const payables: Payable[] = await this.payableRepository.listUserPayables(input.userId, statusMatched);
 
     return {
       payables

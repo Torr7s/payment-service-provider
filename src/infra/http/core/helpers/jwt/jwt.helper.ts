@@ -2,7 +2,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { JwtPayload } from '@/src/types';
 
-import { UserEntity } from '@/src/app/entities/user.entity';
+import { User } from '@/src/app/entities/user';
 
 const jwtService = new JwtService({
   secret: process.env.JWT_SECRET_KEY,
@@ -18,7 +18,7 @@ const jwtService = new JwtService({
   }
 });
 
-export const signToken = (user: UserEntity): string => {
+export const signToken = (user: User): string => {
   const payload: JwtPayload = {
     sub: user.email
   }
