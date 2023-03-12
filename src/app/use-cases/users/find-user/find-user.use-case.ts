@@ -33,8 +33,6 @@ export class FindUserUseCase implements
       );
     }
 
-    delete user.password;
-
     return {
       user
     }
