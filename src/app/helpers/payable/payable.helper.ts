@@ -1,13 +1,13 @@
 import { PaymentMethod, Prisma } from '@prisma/client';
 
-import { TransactionEntity } from '../../entities/transaction.entity';
+import { Transaction } from '../../entities/transaction';
 
 enum PaymentMethodFee {
   CREDIT_CARD = 0.05,
   DEBIT_CARD = 0.03
 }
 
-export const calculateFee = (transaction: TransactionEntity): Prisma.Decimal => {
+export const calculateFee = (transaction: Transaction): Prisma.Decimal => {
   const paymentMethod: string = transaction.paymentMethod;
   const value: number = Number(transaction.value);
 

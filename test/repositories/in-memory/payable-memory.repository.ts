@@ -1,23 +1,22 @@
 import { PayableStatus } from '@prisma/client';
 
+import { Payable } from '@/src/app/entities/payable';
 import { PayableRepository } from '@/src/app/repositories/payable.repository';
 
-import { PayableEntity } from '@/src/app/entities/payable.entity';
-
 export class PayableInMemoryRepository implements PayableRepository {
-  private readonly payables: Array<PayableEntity>;
+  private readonly payables: Array<Payable>;
 
   constructor() {
     this.payables = [];
   }
 
-  public async create(data: PayableEntity): Promise<PayableEntity> {
+  public async create(data: Payable): Promise<Payable> {
     const element: number = this.payables.push(data);
 
     return this.payables[element - 1];
   }
 
-  public async listUserPayables(userId: string, payableStatus: PayableStatus): Promise<Array<PayableEntity>> {
+  public async listUserPayables(userId: string, payableStatus: PayableStatus): Promise<Array<Payable>> {
     return this.payables.filter(payable => 
       payable.userId === userId && 
       payable.status === payableStatus
